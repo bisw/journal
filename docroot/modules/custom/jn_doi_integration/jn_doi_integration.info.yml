@@ -1,0 +1,8 @@
+name: Journal BOI Integrattion
+description: Provide functionality for boi integration.
+package: Journal
+type: module
+core: 8.x
+
+dependencies:
+  - journal

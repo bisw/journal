@@ -1,0 +1,84 @@
+<?php
+
+/**
+ * Implements hook_element_info_alter().
+ */
+function custom_field_wrapper_element_info_alter(array &$types) {
+  foreach ($types as $type => $info) {
+    $types[$type]['#after_build'][] = '_custom_field_wrapper_fields_element_after_build';
+  }
+}
+
+function _custom_field_wrapper_fields_element_after_build($element, &$form_state) {
+  if (!isset($element['#title']) && !isset($element['widget']['#title'])) {
+    return $element;
+  }
+  if (!isset($element['#field_name']) && !isset($element['widget']['#field_name'])) {
+    return $element;
+  }
+
+  if (isset($element['widget']['#title'])) {
+    $field = $element['widget'];
+  } else {
+    $field = $element;
+  }
+  $field_name = $field['#field_name'];
+  if(isset($form_state->getStorage()['form_display'])){
+    $form_mode = $form_state->getStorage()['form_display']->getMode();
+    $components = $form_state->getStorage()['form_display']->getComponent($field_name);
+
+    if (empty($components['third_party_settings']['custom_field_wrapper'])) {
+      return $element;
+    }
+    $nroll_field_wrapper = $components['third_party_settings']['custom_field_wrapper'];
+    $element['#prefix'] = '<!--FS_WRAP-->'.$nroll_field_wrapper['wrapper_prefix'];
+    $element['#suffix'] = $nroll_field_wrapper['wrapper_suffix'].'<!--FS_WRAP-->';
+  }
+  return $element;
+}
+
+/**
+ * Implements hook_field_widget_settings_summary_alter().
+ */
+function custom_field_wrapper_field_widget_settings_summary_alter(&$summary, $context){
+  $wrapper_prefix = $context['widget']->getThirdPartySetting('custom_field_wrapper', 'wrapper_prefix');
+  $wrapper_suffix = $context['widget']->getThirdPartySetting('custom_field_wrapper', 'wrapper_suffix');
+
+  $summary_items = array();
+
+  if ($wrapper_prefix) {
+    $summary_items[] = t('Wrapper prefix: @wrapper_prefix', array('@wrapper_prefix' => $wrapper_prefix));
+  }
+  if ($wrapper_suffix) {
+    $summary_items[] = t('Wrapper suffix: @wrapper_suffix', array('@wrapper_suffix' => $wrapper_suffix));
+  }
+  if (!empty($summary_items)) {
+    $item_list = array(
+      '#theme' => 'item_list',
+      '#items' => $summary_items,
+      '#title' => '',
+    );
+    $summary[] = render($item_list);
+  }
+}
+
+/**
+ * Implements hook_field_widget_third_party_settings_form().
+ *
+ * Adds a 'class' textfield to all formatters.
+ */
+function custom_field_wrapper_field_widget_third_party_settings_form(\Drupal\Core\Field\WidgetInterface $plugin, \Drupal\Core\Field\FieldDefinitionInterface $field_definition, $form_mode, $form, \Drupal\Core\Form\FormStateInterface $form_state) {
+  $element['wrapper_prefix'] = array(
+      '#type'           => 'textfield',
+      '#title'          => t('Wrapper Prefix'),
+      '#description'    => t('Prefix will display before the widget.'),
+      '#default_value'  => $plugin->getThirdPartySetting('custom_field_wrapper', 'wrapper_prefix'),
+  );
+  $element['wrapper_suffix'] = array(
+      '#type'           => 'textfield',
+      '#title'          => t('Wrapper Suffix'),
+      '#description'    => t('Suffix will display after the widget.'),
+      '#default_value'  => $plugin->getThirdPartySetting('custom_field_wrapper', 'wrapper_suffix'),
+  );
+  return $element;
+}

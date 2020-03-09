@@ -1,0 +1,43 @@
+<{{ data.verb }}>
+  {% for record in data.records %}
+    {% if data.verb == 'ListIdentifiers' %}
+    <header>
+      <identifier>{{ record.oai_prefix }}{{ record.oai }}</identifier>
+      <datestamp>{{ record.created_date }}</datestamp>
+      <setSpec>{{ record.setspec }}</setSpec>
+    </header>
+    {% elseif data.verb == 'ListRecords' and data.verb == 'GetRecord' %}
+    <record>
+      <header>
+        <identifier>{{ record.oai_prefix }}{{ record.oai }}</identifier>
+        <datestamp>{{ record.created_date }}</datestamp>
+        <setSpec>{{ record.setspec }}</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc = "http://www.openarchives.org/OAI/2.0/oai_dc/" Page 9/21DOI Registration Manual, V. 1.1
+xmlns:dc = "http://purl.org/dc/elements/1.1/" xmlns:dcterms = "http://purl.org/dc/dc/terms/"
+xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation = http://www.openarchives.org/OAI/2.0/oai_dc/
+http://www.openarchives.org/OAI/2.0/oai_dc.xsd>
+          <dc:title>{{ record.title }}</dc:title>
+          <dc:type>Text</dc:type>
+          <dc:type>{{ record.type }}</dc:type>
+          <dc:description>Elemente der Naturwissenschaft {{ record.volume }}, p. {{ record.start }}{{ record.end }}.</dc:description>
+          <dc:date>{{ record.pub_year }}</dc:date>
+          <dc:publisher>{{ record.publisher }}</dc:publisher>
+          <dc:language>{{ record.lang }}</dc:language>
+          <dc:rights>{{ record.rights }}</dc:rights>
+          <dc:identifier>{{ record.node_url }}</dc:identifier>
+          <dc:identifier>doi:{{ record.doi }}</dc:identifier>
+          <dc:description>{{ record.abstract_en }}</dc:description>
+          <dc:description>{{ record.abstract_de }}</dc:description>
+          <dcterms:bibliographicCitation>Elemente der Naturwissenschaft {{ record.volume }}, p. {{ record.start }}{{ record.end }}</dcterms:bibliographicCitation>
+          <dcterms:isPartOf>{{ record.ispartof }}</dcterms:isPartOf>
+          {% for author in data.authors %}
+            <dc:creator>{{ author }}</dc:creator>
+          {% endfor %}
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    {% endif %}
+  {% endfor %}
+</{{ data.verb }}>

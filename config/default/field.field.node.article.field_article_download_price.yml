@@ -1,0 +1,23 @@
+uuid: 14e1e6e9-e365-4bcc-b413-9ffb31b79837
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_article_download_price
+    - node.type.article
+id: node.article.field_article_download_price
+field_name: field_article_download_price
+entity_type: node
+bundle: article
+label: 'Download Price in Euro'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: float

@@ -1,0 +1,18 @@
+uuid: 6684a255-df71-44ab-a09f-5e725345667f
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_article_access_price
+field_name: field_article_access_price
+entity_type: node
+type: float
+settings: {  }
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

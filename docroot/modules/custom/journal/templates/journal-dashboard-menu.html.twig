@@ -1,0 +1,7 @@
+<div class="editor-dashboard">
+  <ul>
+  {% for name, item in items %}
+    <li class="{{ name }}"><a href="{{ item.url }}">{{ item.title }}</a></li>
+  {% endfor %}
+  </ul>
+</div>

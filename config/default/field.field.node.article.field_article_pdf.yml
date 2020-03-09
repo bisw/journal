@@ -1,0 +1,27 @@
+uuid: 53d94445-2301-4687-a6ea-c0d973870430
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_article_pdf
+    - node.type.article
+  module:
+    - file
+id: node.article.field_article_pdf
+field_name: field_article_pdf
+entity_type: node
+bundle: article
+label: 'Attach PDF Article'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  file_directory: '[date:custom:Y]-[date:custom:m]'
+  file_extensions: pdf
+  max_filesize: ''
+  description_field: false
+  handler: 'default:file'
+  handler_settings: {  }
+field_type: file

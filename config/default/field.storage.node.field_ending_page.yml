@@ -1,0 +1,20 @@
+uuid: c3f608c9-633d-4ce1-83c1-0bdce6ed3420
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_ending_page
+field_name: field_ending_page
+entity_type: node
+type: integer
+settings:
+  unsigned: false
+  size: normal
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

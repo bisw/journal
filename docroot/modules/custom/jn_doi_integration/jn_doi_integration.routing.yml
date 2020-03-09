@@ -1,0 +1,15 @@
+jn_doi_integration.config:
+  path: '/admin/config/journal/doi'
+  defaults:
+    _form: '\Drupal\jn_doi_integration\Form\JnDoiConfigForm'
+    _title: 'Doi Config'
+  requirements:
+    _permission: 'administer site configuration'
+
+jn_doi_integration.doi_service:
+  path: '/oai-script'
+  defaults:
+    _controller: '\Drupal\jn_doi_integration\Controller\JnDoiController::doiService'
+    _title: 'Doi Service'
+  requirements:
+    _permission: 'access content'

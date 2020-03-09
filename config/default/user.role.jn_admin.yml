@@ -1,0 +1,9 @@
+uuid: e6350650-102f-46bc-8e17-b5011362111e
+langcode: en
+status: true
+dependencies: {  }
+id: jn_admin
+label: 'JN Admin'
+weight: 3
+is_admin: null
+permissions: {  }
