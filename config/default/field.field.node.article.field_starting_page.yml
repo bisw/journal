@@ -1,0 +1,23 @@
+uuid: 8b9dec2b-0a91-4d9d-99ce-c9e1df6a4635
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_starting_page
+    - node.type.article
+id: node.article.field_starting_page
+field_name: field_starting_page
+entity_type: node
+bundle: article
+label: 'Starting Page'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

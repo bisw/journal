@@ -1,0 +1,14 @@
+uuid: 783bd8b1-aa45-46aa-881f-3e727ee0d723
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.jn_admin
+  module:
+    - user
+id: user_remove_role_action.jn_admin
+label: 'Remove the JN Admin role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: jn_admin

@@ -1,0 +1,6 @@
+jn_doi_integration.config:
+  title: 'DOI Config'
+  description: 'DOI Config'
+  parent: journal.config
+  route_name: jn_doi_integration.config
+  weight: 100

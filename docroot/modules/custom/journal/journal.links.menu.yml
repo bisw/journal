@@ -1,0 +1,6 @@
+journal.config:
+  title: 'Journal Config'
+  description: 'Journal Configuration'
+  parent: system.admin_config
+  route_name: journal.config
+  weight: 100

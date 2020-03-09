@@ -1,0 +1,23 @@
+uuid: 017cd5b4-8cfa-4ba1-b74f-5c61687a681f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_article_access_price
+    - node.type.article
+id: node.article.field_article_access_price
+field_name: field_article_access_price
+entity_type: node
+bundle: article
+label: 'Open Access Amount in Euro'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: float

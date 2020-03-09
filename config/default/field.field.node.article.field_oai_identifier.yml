@@ -1,0 +1,19 @@
+uuid: e94c94c1-cb36-4591-8fc3-33c2389c6170
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_oai_identifier
+    - node.type.article
+id: node.article.field_oai_identifier
+field_name: field_oai_identifier
+entity_type: node
+bundle: article
+label: 'OAI Identifier'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

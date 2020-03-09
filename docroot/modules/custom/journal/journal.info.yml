@@ -1,0 +1,5 @@
+name : 'Journal'
+description : 'Provides a common functionality for the site.'
+core: 8.x
+type: module
+package: Journal

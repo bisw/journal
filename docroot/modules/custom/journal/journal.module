@@ -1,0 +1,280 @@
+<?php
+
+use Drupal\node\Entity\Node;
+use Drupal\views\ViewExecutable;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Form\FormStateInterface;
+
+
+/**
+ * Implements hook_form_alter() on behalf of testing.module.
+ */
+function journal_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  if ($form_id == 'contact_message_feedback_form') {
+    $form['actions']['preview']['#access'] = FALSE;
+  }
+
+  if ($form_id == 'node_article_form' || $form_id == 'node_article_edit_form') {
+    $form['actions']['preview']['#access'] = FALSE;
+    $form['revision_information']['#access'] = FALSE;
+    $form['#attached']['library'][] = 'journal/article_lib';
+    $form['#attached']['drupalSettings']['journal']['doiConfig'] = jn_doi_integration_get_config();
+    // $form['field_year_of_publication']['widget'][0]['value']['#date_year_range'] = '-55:+100';
+    // $form['field_year_of_publication']['widget'][0]['value']['#ajax'] = array(
+    //   'callback' => '_journal_set_dynamic_volume',
+    //   'wrapper' =>'volume-wrapper',
+    //   'event' => 'change',
+    // );
+
+    //echo "<pre>"; print_r($form['revision_information']);die;
+    // $form['field_volume_number']['#prefix'] = '<div id="volume-wrapper">';
+    // $form['field_volume_number']['#suffix'] = '</div>';
+
+    // $year_default = $form['field_year_of_publication']['widget'][0]['value']['#default_value'];
+    // if ($year_default) {
+    //   $form['field_volume_number']['widget']['#options'] = _journal_get_volume_by_year($year_default->format("Y"));
+    // } else if ($form_state->getValue('field_year_of_publication')) {
+    //   $year = $form_state->getValue('field_year_of_publication')[0]['value']->format("Y");
+    //   $form['field_volume_number']['widget']['#options'] = _journal_get_volume_by_year($year);
+    // } else {
+    //   $form['field_volume_number']['widget']['#options'] = ['_none' => 'None'];
+    // }
+
+    $form['field_volume_number']['#prefix'] = '<div id="volume-wrapper">';
+    $form['field_volume_number']['#suffix'] = '</div>';
+
+    $year_default = $form['field_year']['widget']['#default_value'][0];
+    $form['field_year']['widget']['#ajax'] = array(
+      'callback' => '_journal_set_dynamic_volume',
+      'wrapper' =>'volume-wrapper',
+      'event' => 'change',
+    );
+
+    if ($form_state->getValue('field_year')) {
+      $year = $form_state->getValue('field_year')[0]['value'];
+      $form['field_volume_number']['widget']['#options'] = _journal_get_volume_by_year($year);
+    } else if ($year_default) {
+      $form['field_volume_number']['widget']['#options'] = _journal_get_volume_by_year($year_default);
+    } else {
+      $form['field_volume_number']['widget']['#options'] = ['_none' => 'None'];
+    }
+  }
+}
+
+function journal_theme($existing, $type, $theme, $path) {
+  return [
+    'journal_dashboard_menu' => [
+      'variables' => ['items' => []],
+    ],
+  ];
+}
+
+
+/**
+ * Implements hook_entity_presave().
+ */
+function journal_entity_presave(EntityInterface $entity) {
+  switch ($entity->bundle()) {
+		case 'article':
+			$config = jn_doi_integration_get_config();
+			$vol = $entity->get('field_volume_number')->value;
+			$start = $entity->get('field_starting_page')->value;
+			$div = $entity->get('field_page_division')->value;
+      $oai = 'edn.' . $vol . '.' . $start . ($div == '_none' ? '' : $div);
+      $entity->set('field_volume', $vol);
+			$entity->set('field_oai_identifier', $oai);
+			$entity->set('field_doi_number', $config['doi_prefix'] . '/' . $oai);
+			$pub_year = $entity->get('field_year')->value . '-' . $entity->get('field_month')->value . '-01';
+			//$pub_year = "1964-01-31";
+      $pub_year = date( "Y-m-d", strtotime($pub_year)); 
+      $entity->set('field_year_of_publication', $pub_year);
+      $entity->set('field_publication_year', $entity->get('field_year')->value);
+
+      if ($entity->hasField('field_authors')) {
+        foreach ($entity->get('field_authors')->referencedEntities() as $author) {
+          $authors = !empty($authors) ? $authors . ', ' : '';
+          if (!empty($author->get('field_first_name')->value)) {
+            $authors .= $author->get('field_first_name')->value;
+          }
+  
+          if (!empty($author->get('field_last_name')->value)) {
+            $authors .= ' ' . $author->get('field_last_name')->value;
+          }
+        }
+
+        $entity->set('field_search_authors', $authors);
+      }
+
+      break;
+	}
+
+}
+
+/**
+ * Implements hook_views_pre_view().
+ */
+function journal_views_pre_view(ViewExecutable $view, $display_id, array &$args) {
+  if ($view->id() == 'category_pages') {
+    if (isset($args[0])) {
+      $term = taxonomy_term_load_multiple_by_name($args[0], 'category');
+      $term_name = empty($term) ? ucwords(str_replace("-", " ", $args[0])) : $args[0];
+
+      if (!empty($term_name)) {
+        $args[0] = $term_name;
+      }
+    }
+  }
+}
+
+function _journal_set_dynamic_volume(array &$form, FormStateInterface $form_state) {
+  $form_state->setRebuild(TRUE);
+  drupal_get_messages();
+  return ($form['field_volume_number']);
+}
+
+function _journal_get_volume_by_year($year) {
+  if ($year == '1964') {
+    return ['1' => '1'];
+  } else {
+    $net_year = $year - 1964;
+    $first_vol = $net_year * 2;
+    $sec_vol = $net_year * 2 + 1;
+    return [$first_vol => $first_vol, $sec_vol => $sec_vol];
+  }
+}
+
+function getMetadataFromNode($node) {
+  $authors = [];
+  if ($node->hasField('field_authors')) {
+    foreach ($node->get('field_authors')->referencedEntities() as $author) {
+      $author = [];
+      if (!empty($author->get('field_first_name')->value)) {
+        $author['first_name'] = $author->get('field_first_name')->value;
+      }
+
+      if (!empty($author->get('field_last_name')->value)) {
+        $author['last_name'] = $author->get('field_last_name')->value;
+      }
+
+      $authors[] = $author;
+    }
+  }
+
+  return [
+    'title' => $title,
+    'sub_title' => $node->get('field_sub_title')->value,
+    'nid' => $node->id(),
+    'created' => $node->getCreatedTime(),
+    'cat' => $node->get('field_journal_category')->value,
+    'abstract_en' => $node->get('body')->value,
+    'abstract_de' => $node->get('field_de_abstract')->value,
+    'pub_year' => $node->get('field_year_of_publication')->value,
+    'volume' => $node->get('field_volume_number')->value,
+    'start' => $node->get('field_starting_page')->value,
+    'end' => $node->get('field_ending_page')->value,
+    'oai' => $node->get('field_oai_identifier')->value,
+    'doi' => $node->get('field_doi_number')->value,
+    'lang' => $node->get('field_language')->value,
+    'authors' => $authors,
+  ];
+}
+
+function journal_get_lang_name($lang) {
+  $language = [
+    'de' => 'German',
+    'en' => 'English',
+    'fr' => 'French',
+    'es' => 'Spanish',
+    'other' => 'Other',
+  ];
+
+  return isset($language[$lang]) ? $language[$lang] : 'English';
+}
+
+function journal_bib_to_latex_codes() {
+  return [
+    "À" => '{\`A}',
+    "Á" => "{\'A}",
+    "Ä" => '{\"A}',
+    "Å" => '{\r{A}}',
+    "Ç" => '{\c{C}}',
+    "È" => '{\`E}',
+    "É" => "{\'E}",
+    "Ì" => '{\`I}',
+    "Í" => "{\'I}",
+    "Ò" => '{\`O}',
+    "Ó" => "{\'O}",
+    "Ö" => '{\"O}',
+    "Ø" => '{\O}',
+    "Ù" => '{\`U}',
+    "Ú" => "{\'U}",
+    "Ü" => '{\"U}',
+    "Ý" => "{\'Y}",
+    "ß" => '{\ss}',
+    "à" => '{\`a}',
+    "á" => "{\'a}",
+    "ä" => '{\"a}',
+    "å" => '{\r{a}}',
+    "ç" => '{\c{c}}',
+    "è" => '{\`e}',
+    "é" => "{\'e}",
+    "ì" => '{\`i}',
+    "í" => "{\'i}",
+    "ò" => '{\`o}',
+    "ó" => "{\'o}",
+    "ö" => '{\"o}',
+    "ø" => '{\o}',
+    "ù" => '{\`u}',
+    "ú" => "{\'u}",
+    "ü" => '{\"u}',
+    "ý" => "{\'y}",
+    "Ć" => "{\'C}",
+    "ć" => "{\'c}",
+    "Č" => '{\v{C}}',
+    "č" => '{\v{c}}',
+    "Ď" => '{\v{D}}',
+    "ď" => '{\v{d}}',
+    "Ě" => '{\v{E}}',
+    "ě" => '{\v{e}}',
+    "ħ" => "$\hbar$",
+    "Ĺ" => "{\'L}",
+    "ĺ" => "{\'l}",
+    "Ń" => "{\'N}",
+    "ń" => "{\'n}",
+    "Ň" => '{\v{N}}',
+    "ň" => '{\v{n}}',
+    "Œ" => '{\OE}',
+    "œ" => '{\oe}',
+    "Ŕ" => "{\'R}",
+    "ŕ" => "{\'r}",
+    "Ř" => '{\v{R}}',
+    "ř" => '{\v{r}}',
+    "Š" => '{\v{S}}',
+    "š" => '{\v{s}}',
+    "Ť" => '{\v{T}}',
+    "ť" => '{\v{t}}',
+    "Ů" => '{\r{U}}',
+    "ů" => '{\r{u}}',
+    "Ź" => "{\'Z}",
+    "ź" => "{\'z}",
+    "Ż" => '{\. Z}',
+    "ż" => '{\. z}',
+    "Ž" => '{\v{Z}}',
+    "ž" => '{\v{z}}',
+    "#" => '{\#}',
+    "$" => '{\$}',
+    "%" => '{\%}',
+    "&" => '{\&}',
+    "«" => '{\guillemotleft}',
+    "»" => '{\guillemotright}',
+    "–" => "--",
+    "‹" => '{\guilsinglleft}',
+    "›" => '{\guilsinglright}',
+    "“" => '{``}',
+    "”" => "{''}",
+    "„" => '{\quotedblbase}',
+    "‘" => '{`}',
+    "’" => "{'}",
+    "‚" => "{\quotesinglbase}",
+  ];
+}

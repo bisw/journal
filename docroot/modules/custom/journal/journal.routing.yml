@@ -1,0 +1,15 @@
+journal.config:
+  path: '/admin/config/journal'
+  defaults:
+    _form: '\Drupal\journal\Form\JournalConfigForm'
+    _title: 'Journal Config'
+  requirements:
+    _permission: 'administer site configuration'
+
+journal.downlaod:
+  path: '/downlaod/{node}/{type}'
+  defaults:
+    _controller: '\Drupal\journal\Controller\JournalDownload::getDownload'
+    _title: 'Doi Service'
+  requirements:
+    _permission: 'access content'

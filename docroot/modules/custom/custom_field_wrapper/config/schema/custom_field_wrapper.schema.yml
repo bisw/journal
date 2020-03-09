@@ -1,0 +1,10 @@
+field.formatter.third_party.custom_field_wrapper:
+  type: mapping
+  label: 'Field wrapper entity display settings'
+  mapping:
+    wrapper_prefix:
+      type: string
+      label: Prefix
+    wrapper_suffix:
+      type: string
+      label: Suffix

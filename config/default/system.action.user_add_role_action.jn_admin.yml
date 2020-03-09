@@ -1,0 +1,14 @@
+uuid: 189be068-f345-4d64-819e-e2cd8d2b97fe
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.jn_admin
+  module:
+    - user
+id: user_add_role_action.jn_admin
+label: 'Add the JN Admin role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: jn_admin

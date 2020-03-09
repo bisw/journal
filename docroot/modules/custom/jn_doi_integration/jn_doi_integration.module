@@ -1,0 +1,81 @@
+<?php
+
+function jn_doi_integration_theme($existing, $type, $theme, $path) {
+  return [
+    'doi_service' => [
+      'variables' => ['data' => []],
+	],
+	'doi_services' => [
+	  'variables' => ['data' => []],
+    ],
+    'doi_service_record' => [
+	  'variables' => ['data' => []],
+	],
+	'doi_service_identify' => [
+	  'variables' => ['data' => []],
+	],
+	'doi_service_metadataformat' => [
+	  'variables' => ['data' => []],
+	],
+  ];
+}
+
+function jn_doi_integration_get_nodes_by_from_until($type, $from, $until) {
+  $conn = \Drupal::database();
+
+  if (!empty($from)) {
+    $from = date('Y-m-d H:i:s', strtotime($from));
+  }
+
+  if (!empty($until)) {
+    $until = date('Y-m-d H:i:s', strtotime($until));
+  }
+
+  if (empty($from) && empty($until)) {
+    $nids = $conn->select('node_field_data', 'n')
+      ->fields('n', array('nid'))
+      ->condition('type', $type, '=')
+      ->exjn_doi_integration_themeecute()
+      ->fetchCol();
+  } elseif (!empty($from) && !empty($until)) {
+    $nids = $conn->select('node_field_data', 'n')
+      ->fields('n', array('nid'))
+      ->condition('type', $type, '=')
+      ->condition('created', strtotime($from), '>')
+      ->condition('created', strtotime($until), '<')
+      ->execute()
+      ->fetchCol();
+  } elseif (!empty($from)) {
+    $nids = $conn->select('node_field_data', 'n')
+      ->fields('n', array('nid'))
+      ->condition('type', $type, '=')
+      ->condition('created', strtotime($from), '>=')
+      ->execute()
+      ->fetchCol();
+  } elseif (!empty($until)) {
+    $nids = $conn->select('node_field_data', 'n')
+      ->fields('n', array('nid'))
+      ->condition('type', $type, '=')
+      ->condition('created', strtotime($until), '<=')
+      ->execute()
+      ->fetchCol();
+  }
+
+  return $nids;
+}
+
+function jn_doi_integration_get_nid_by_oai($oai) {
+  $conn = \Drupal::database();
+  return $conn->query('SELECT entity_id FROM {node__field_oai_identifier} WHERE `field_oai_identifier_value`=:oai LIMIT 1', array(':oai'=>$oai))->fetchField();
+}
+
+function jn_doi_integration_get_config() {
+  $config = \Drupal::config('jn_doi_integration.settings');
+
+  return [
+    'verbs' => explode(',', $config->get('verbs')),
+     'admin_email' => $config->get('admin_email'),
+     'oai_prefix' => $config->get('oai_prefix'),
+     'doi_prefix' => $config->get('doi_prefix'),
+  ];
+}
