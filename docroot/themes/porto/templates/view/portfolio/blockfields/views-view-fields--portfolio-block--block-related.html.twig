@@ -1,0 +1,19 @@
+{% set thumbnail = row._entity.field_thumbnail %}
+<li class="col-md-3 col-sm-6 col-xs-12">
+	<div class="portfolio-item">
+		<a href="{{ fields.path.content }}">
+			<span class="thumb-info thumb-info-lighten">
+				<span class="thumb-info-wrapper">
+					<img class="img-responsive" alt="{{ fields.title.content }}" src="{{ file_url(thumbnail.entity.fileuri)  }}" />
+					<span class="thumb-info-title">
+						<span class="thumb-info-inner">{{ fields.title.content }}</span>
+						<span class="thumb-info-type">{{ fields.field_portfolio_category.content }}</span>
+					</span>
+					<span class="thumb-info-action">
+						<span class="thumb-info-action-icon"><i class="fa fa-link"></i></span>
+					</span>
+				</span>
+			</span>
+		</a>
+	</div>
+</li>

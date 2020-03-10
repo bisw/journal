@@ -1,0 +1,18 @@
+{% for key, item in items %}
+    {% set link = file_url(item.content['#field_collection_item'].field_image.entity.fileuri) %}
+    {% set tid = item.content['#field_collection_item'].item_id.value %}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse{{ tid }}">
+                    {{ item.content['#field_collection_item'].field_title.value }}
+                </a>
+            </h4>
+        </div>
+        <div id="collapse{{ tid }}" class="accordion-body collapse">
+            <div class="panel-body">
+                <p>{{ item.content['#field_collection_item'].field_description.value | striptags }}</p>
+            </div>
+        </div>
+    </div>
+{% endfor %}

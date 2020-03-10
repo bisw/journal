@@ -1,0 +1,16 @@
+{%
+    set classes = [
+    'block',
+    'block-' ~ configuration.provider|clean_class,
+    'block-' ~ plugin_id|clean_class,
+]
+%}
+{% set style = content.field_layout_toggles[0]['#markup'] %}
+<div{{ attributes.addClass(classes) }}>
+    {{ title_prefix }}
+    <h4>{{ content.field_title[0]['#context']['value'] }}</h4>
+    <div class="toggle {% if style == 'style1' %}{{ 'toggle-primary' }}{% elseif style == 'style2' %}{{ 'toggle-secondary' }}{% elseif style == 'style3' %}{{ 'toggle-tertiary' }}{% elseif style == 'style4' %}{{ 'toggle-quaternary' }}{% elseif style == 'style5' %}{{ 'toggle-primary toggle-sm' }}{% elseif style == 'style6' %}{{ 'toggle-primary toggle-lg' }}{% endif %}" data-plugin-toggle>
+        {{ content.field_content }}
+    </div>
+    {{ title_suffix }}
+</div>

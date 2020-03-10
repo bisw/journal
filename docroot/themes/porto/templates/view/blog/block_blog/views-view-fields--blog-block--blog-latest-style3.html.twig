@@ -1,0 +1,21 @@
+<div class="col-md-6">
+    <div class="recent-posts">
+        <article class="post">
+            <div class="date">
+                {% if fields.created %}
+                    <span class="day">{{ fields.created.content }}</span>
+                {% endif %}
+                {% if fields.created_1 %}
+                    <span class="month">{{ fields.created_1.content }}</span>
+                {% endif %}
+            </div>
+            {% if fields.title %}
+                <h4 class="heading-primary"><a href="{{ fields.path.content }}">{{ fields.title.content }}</a></h4>
+            {% endif %}
+            {% if fields.body %}
+                {{ fields.body.content }}<a href="{{ fields.path.content }}" class="read-more">read more <i class="fa fa-angle-right"></i></a>
+            {% endif %}
+        </article>
+    </div>
+</div>
+

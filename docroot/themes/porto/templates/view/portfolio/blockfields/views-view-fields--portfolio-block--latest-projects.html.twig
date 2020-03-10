@@ -1,0 +1,98 @@
+{% set thumbnail = row._entity.field_thumbnail %}
+
+<div class="portfolio-item">
+    <a href="#popupProject{{ row.nid }}" data-portfolio-on-modal>
+        <span class="thumb-info thumb-info-lighten">
+            <span class="thumb-info-wrapper">
+                <img src="{{ file_url(thumbnail.entity.fileuri) }}" class="img-responsive" alt="">
+                <span class="thumb-info-title">
+                    {% if fields.title %}
+                        <span class="thumb-info-inner">{{ fields.title.content }}</span>
+                    {% endif %}
+                    {% if fields.field_portfolio_category %}
+                        <span class="thumb-info-type">{{ fields.field_portfolio_category.content }}</span>
+                    {% endif %}
+                </span>
+                <span class="thumb-info-action">
+                    <span class="thumb-info-action-icon"><i class="fa fa-plus-square"></i></span>
+                </span>
+            </span>
+        </span>
+    </a>
+    <div id="popupProject{{ row.nid }}" class="popup-inline-content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="portfolio-title">
+                    <div class="row">
+                        <div class="portfolio-nav-all col-md-1">
+                            <a href="#" data-portfolio-close><i class="fa fa-th"></i></a>
+                        </div>
+                        {% if fields.title %}
+                            <div class="col-md-10 center">
+                                <h2 class="mb-none">{{ fields.title.content }}</h2>
+                            </div>
+                        {% endif %}
+                        <div class="portfolio-nav col-md-1">
+                            <a href="#" data-portfolio-prev class="portfolio-nav-prev"><i class="fa fa-chevron-left"></i></a>
+                            <a href="#" data-portfolio-next class="portfolio-nav-next"><i class="fa fa-chevron-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <hr class="tall">
+            </div>
+        </div>
+        <div class="row mb-xl">
+            <div class="col-md-4">
+            <span class="img-thumbnail">
+                <img alt="" class="img-responsive" src="{{ file_url(thumbnail.entity.fileuri) }}">
+            </span>
+            </div>
+            <div class="col-md-8">
+                <div class="portfolio-info">
+                    <div class="row">
+                        <div class="col-md-12 center">
+                            <ul>
+                                {% if fields.created %}
+                                    <li>
+                                        <i class="fa fa-calendar"></i> {{ fields.created.content }}
+                                    </li>
+                                {% endif %}
+                                {% if fields.field_portfolio_category %}
+                                    <li>
+                                        <i class="fa fa-tags"></i> {{ fields.field_portfolio_category.content }}
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <h5 class="mt-sm">Project Description</h5>
+                {% if fields.body %}
+                    <p class="mt-xlg">{{ fields.body.content }}</p>
+                {% endif %}
+                {% if fields.path %}
+                    <a href="{{ fields.path.content  }}" class="btn btn-primary btn-icon"><i class="fa fa-external-link"></i>Live Preview</a>
+                {% endif %}
+                {% set skills = row._entity.field_portfolio_skills %}
+                <ul class="portfolio-details">
+                    <li>
+                        <h5 class="mt-sm mb-xs">Skills</h5>
+                        <ul class="list list-inline list-icons">
+                            {% for skill in skills  %}
+                                <li><i class="fa fa-check-circle"></i> {{ skill.value }}</li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    <li>
+
+                        <h5 class="mt-sm mb-xs">{% trans %}Client{% endtrans %}</h5>
+
+                        {% if fields.field_portfolio_client %}
+                            <p>{{ fields.field_portfolio_client.content }}</p>
+                        {% endif %}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

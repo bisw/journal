@@ -1,0 +1,41 @@
+
+{% if footer_option == 'none' %}
+    {% if arg == 'index-footer-advanced' %}
+        {% include directory ~ '/templates/includes/footer_option/f_advanced.html.twig' %}
+    {% elseif arg == 'index-footer-simple' %}
+        {% include directory ~ '/templates/includes/footer_option/f_simple.html.twig' %}
+    {% elseif arg == 'index-corporate-3' %}
+        {% include directory ~ '/templates/includes/footer_option/f_simple.html.twig' %}
+    {% elseif arg == 'index-one-page' %}
+        {% include directory ~ '/templates/includes/footer_option/f_simple.html.twig' %}
+    {% elseif arg == 'index-footer-light' %}
+        {% include directory ~ '/templates/includes/footer_option/f_light.html.twig' %}
+    {% elseif arg == 'index-footer-light-narrow' %}
+        {% include directory ~ '/templates/includes/footer_option/f_light_narrow.html.twig' %}
+    {% elseif arg == 'index-footer-latest-work' %}
+        {% include directory ~ '/templates/includes/footer_option/f_latest_work.html.twig' %}
+    {% elseif arg == 'index-footer-contact-form' %}
+        {% include directory ~ '/templates/includes/footer_option/f_contact_form.html.twig' %}
+    {% else %}
+        {% include directory ~ '/templates/includes/footer_option/f_default.html.twig' %}
+    {% endif %}
+{% else %}
+    {% if footer_option == 'f_advanced' %}
+        {% include directory ~ '/templates/includes/footer_option/f_advanced.html.twig' %}
+    {% elseif footer_option == 'f_simple' %}
+        {% include directory ~ '/templates/includes/footer_option/f_simple.html.twig' %}
+    {% elseif footer_option == 'f_light' %}
+        {% include directory ~ '/templates/includes/footer_option/f_light.html.twig' %}
+    {% elseif footer_option == 'f_light_narrow' %}
+        {% include directory ~ '/templates/includes/footer_option/f_light_narrow.html.twig' %}
+    {% elseif footer_option == 'f_latest_work' %}
+        {% include directory ~ '/templates/includes/footer_option/f_latest_work.html.twig' %}
+    {% elseif footer_option == 'f_contact' %}
+        {% include directory ~ '/templates/includes/footer_option/f_contact_form.html.twig' %}
+    {% else %}
+        {% include directory ~ '/templates/includes/footer_option/f_default.html.twig' %}
+    {% endif %}
+{% endif %}
+
+
+

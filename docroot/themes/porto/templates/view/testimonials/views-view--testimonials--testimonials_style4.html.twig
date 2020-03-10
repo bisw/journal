@@ -1,0 +1,50 @@
+
+{%
+  set classes = [
+    dom_id ? 'js-view-dom-id-' ~ dom_id,
+  ]
+%}
+
+<div{{ attributes.addClass(classes) }}>
+  {{ title_prefix }}
+  {{ title }}
+{#  {{ title_suffix }}#}
+    {% if header %}
+        {{ header }}
+    {% endif %}
+
+    <section class="parallax section section-text-light section-parallax section-center mt-xl mb-none" data-plugin-parallax data-plugin-options='{"speed": 1.5}' data-image-src="{{ theme_root }}/img/parallax-6.jpg">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                    <div class="owl-carousel owl-theme nav-bottom rounded-nav" data-plugin-options='{"items": 1, "loop": false}'>
+                        {{ rows }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {{ exposed }}
+  {{ attachment_before }}
+
+  {{ empty }}
+  {{ pager }}
+
+  {{ attachment_after }}
+  {{ more }}
+
+  {% if footer %}
+    <footer>
+      {{ footer }}
+    </footer>
+  {% endif %}
+
+  {{ feed_icons }}
+</div>
+
+
+
+
+
+
+

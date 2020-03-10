@@ -1,0 +1,24 @@
+<div class="col-md-4">
+    <div class="recent-posts mt-xl">
+        <article class="post">
+            <div class="date">
+                {% if fields.created %}
+                    <span class="day">{{ fields.created.content }}</span>
+                {% endif %}
+                {% if fields.created_1 %}
+                    <span class="month">{{ fields.created_1.content }}</span>
+                {% endif %}
+            </div>
+            {% if fields.title %}
+                <h4 class="heading-primary"><a href="{{ fields.path.content }}">{{ fields.title.content }}</a></h4>
+            {% endif %}
+            <div>
+                {% if fields.body %}
+                    {{ fields.body.content }}
+                {% endif %}
+            </div>
+
+            <a href="{{ fields.path.content }}" class="btn btn-borders btn-default mt-md mb-xl">{% trans %} Read More {% endtrans %}</a>
+        </article>
+    </div>
+</div>

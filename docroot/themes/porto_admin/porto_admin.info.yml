@@ -1,0 +1,16 @@
+name: Porto Admin
+type: theme
+base theme: seven
+description: 'Responsive Drupal 8 Theme by Arrowhitech JSC.'
+package: Journal
+core: 8.x
+libraries:
+  - porto_admin/global-styling
+regions:
+  header: 'Header'
+  sidebar: 'Sidebar'
+  highlighted: Highlighted
+  page_top: 'Page top'
+  content: Content
+  page_bottom: 'Page bottom'
+  footer: 'Footer'

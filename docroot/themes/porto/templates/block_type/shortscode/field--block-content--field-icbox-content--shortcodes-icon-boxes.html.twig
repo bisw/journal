@@ -1,0 +1,26 @@
+{% for key, item in items %}
+    <div class="col-md-6">
+        <div class="featured-box featured-box-primary featured-box-text-left">
+            <div class="box-content">
+                <div class="row">
+                    <div class="col-md-9">
+                        <h2>{{ item.content['#field_collection_item'].field_icbox_title.value }}</h2>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="align-right">
+                            <i class="icon-featured fa {{ item.content['#field_collection_item'].field_icbox_icon.value }}"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <p>{{ item.content['#field_collection_item'].field_icbox_description.value | striptags }}</p>
+                        <a href="{{ item.content['#field_collection_item'].field_icbox_link.value }}" class="btn btn-lg btn-primary mr-xs mb-lg" type="button">{{ item.content['#field_collection_item'].field_icbox_learnmore.value }}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+
+

@@ -1,0 +1,8 @@
+{% for key, item in items %}
+    {% set des = item.content['#field_collection_item'].field_tbs_description.value | striptags | trim %}
+    {% set id = item.content['#field_collection_item'].field_tbs_id.value %}
+    {% set add_class = item.content['#field_collection_item'].field_tab_class.value %}
+    <div id="{{ id }}" class="tab-pane {{ add_class }}">
+        {{ des }}
+    </div>
+{% endfor %}

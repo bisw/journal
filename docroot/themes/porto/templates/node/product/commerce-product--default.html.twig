@@ -1,0 +1,206 @@
+{#
+/**
+ * @file
+ *
+ * Default product template.
+ *
+ * Available variables:
+ * - attributes: HTML attributes for the wrapper.
+ * - product: The rendered product fields.
+ *   Use 'product' to print them all, or print a subset such as
+ *   'product.title'. Use the following code to exclude the
+ *   printing of a given field:
+ *   @code
+ *   {{ product|without('title') }}
+ *   @endcode
+ * - product_entity: The product entity.
+ * - product_url: The product URL.
+ *
+ * @ingroup themeable
+ */
+#}
+
+{% set images = product_entity.field_images %}
+{% set thumbnail = product_entity.field_thumbnail %}
+{% set ratingCount = 0 %}
+{% set ratingPercent = 0 %}
+{% set ratingNumber = 0 %}
+{% set sizes = product_entity.field_product_size %}
+{% set colors = product_entity.field_product_color %}
+
+{% set view_mode = product.title['#view_mode'] %}
+{% if view_mode == 'default' %}
+
+    <div class="hidden">
+        {{ product.variations }}
+    </div>
+
+    {% if product.field_regular_price|render|striptags|trim != '' %}
+        <a href="{{ product_url }}">
+            <span class="onsale">Sale!</span>
+        </a>
+    {% endif %}
+
+    <span class="product-thumb-info">
+        <a href="javascript:void(0);" class="add-to-cart-product" onclick="addToCartInList({{ product_entity.id }});">
+            <span><i class="fa fa-shopping-cart"></i> {{ 'Add to Cart'|t }}</span>
+        </a>
+        <a href="{{ product_url }}">
+            <span class="product-thumb-info-image">
+                <span class="product-thumb-info-act">
+                    <span class="product-thumb-info-act-left"><em>{{ 'View'|t }}</em></span>
+                    <span class="product-thumb-info-act-right"><em><i class="fa fa-plus"></i> {{ 'Details'| t }}</em></span>
+                </span>
+
+                {% if thumbnail.entity.fileuri %}
+                    <img alt="" class="img-responsive" src="{{ file_url(thumbnail.entity.fileuri) }}">
+                {% else %}
+                    <img alt="" class="img-responsive" src="http://placehold.it/800x800">
+                {% endif %}
+
+            </span>
+        </a>
+        <span class="product-thumb-info-content">
+            <a href="{{ product_url }}">
+                <h4>{{ product.title }}</h4>
+                <span class="price">
+
+                    {% if product.field_regular_price|render|striptags|trim != '' %}
+                        <del><span class="amount">{{ product.field_regular_price|render|striptags|trim }}</span></del>
+                        <ins><span class="amount">{{ product.variation_price|render|striptags|trim }}</span></ins>
+                        {% else %}
+                        <span class="amount">{{ product.variation_price|render|striptags }}</span>
+                    {% endif %}
+
+                </span>
+            </a>
+        </span>
+    </span>
+
+{% else %}
+
+    <div class="row">
+        <div class="col-md-6">
+
+            {% if images|length %}
+
+                <div class="owl-carousel owl-theme" data-plugin-options='{"items": 1}'>
+                    {% for image  in images %}
+                        <div>
+                            <div class="thumbnail">
+                                <img alt="" class="img-responsive img-rounded" src="{{ file_url(image.entity.fileuri) }}">
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+
+            {% else %}
+
+                <div class="thumbnail">
+                    {% if thumbnail.entity.fileuri %}
+                        <img alt="" class="img-responsive img-rounded" src="{{ file_url(thumbnail.entity.fileuri) }}">
+                    {% else %}
+                        <img alt="" class="img-responsive img-rounded" src="http://placehold.it/800x800">
+                    {% endif %}
+                </div>
+
+            {% endif %}
+
+        </div>
+
+        <div class="col-md-6">
+
+            <div class="summary entry-summary">
+
+                <h1 class="mb-none"><strong>{{ product.title }}</strong></h1>
+
+                <div class="review_num">
+                    <span class="count" itemprop="ratingCount">{{ ratingCount }}</span> review(s)
+                </div>
+
+
+                <div title="Rated {{ ratingNumber }} out of 5" class="star-rating" {% if ratingCount < 3 %}style="opacity: 0;"{% endif %}>
+                    <span style="width:{{ ratingPercent }}%"><strong class="rating">{{ ratingNumber }}</strong> {{ 'out of 5'|t }}</span>
+                </div>
+
+                <p class="price">
+                    <span class="amount">{{ product.variation_price|render|striptags }}</span>
+                </p>
+
+                <p class="taller">{{ product_entity.body.summary|striptags}}</p>
+
+                {{ product.variations }}
+
+                <div class="product_meta">
+                    <span class="posted_in">Categories: {{ product.field_category|render }}</span>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="tabs tabs-product">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#productDescription" data-toggle="tab">Description</a></li>
+                    <li><a href="#productInfo" data-toggle="tab">Aditional Information</a></li>
+                    <li><a href="#productReviews" data-toggle="tab">Reviews ({{ ratingCount }})</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="productDescription">
+                        {{ product.body }}
+                    </div>
+                    <div class="tab-pane" id="productInfo">
+                        <table class="table table-striped mt-xl">
+                            <tbody>
+
+                                {% if sizes|length %}
+                                    <tr>
+                                        <th>
+                                            {{ 'Size:'|t }}
+                                        </th>
+                                        <td>
+                                            {{ product.field_product_size|render|striptags }}
+                                        </td>
+                                    </tr>
+                                {% endif %}
+
+                                {% if colors|length %}
+                                    <tr>
+                                        <th>
+                                            {{ 'Colors'|t }}
+                                        </th>
+                                        <td>
+                                            {{ product.field_product_color|render|striptags }}
+                                        </td>
+                                    </tr>
+                                {% endif %}
+
+                                {% if product.field_material %}
+                                    <tr>
+                                        <th>
+                                            {{ 'Material'|t }}
+                                        </th>
+                                        <td>
+                                            {{ product.field_material|render|striptags }}
+                                        </td>
+                                    </tr>
+                                {% endif %}
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-pane" id="productReviews">
+                        {{ product.field_comments }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr class="tall">
+
+{% endif %}

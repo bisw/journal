@@ -1,0 +1,31 @@
+{% set images = node.field_image %}
+<div class="row">
+    <div class="col-md-4">
+        <div class="owl-carousel owl-theme" data-plugin-options='{"items": 1, "margin": 10}'>
+            {% for image  in images %}
+            <div>
+                <span class="img-thumbnail">
+                    <img alt="" height="300" class="img-responsive" src="{{ file_url(image.entity.fileuri) }}">
+                </span>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="col-md-8">
+        <h2 class="mb-none">{{ label }}</h2>
+        {% if content.field_team_job %}
+        <h4 class="heading-primary">{{ content.field_team_job }}</h4>
+        {% endif %}
+        <hr class="solid">
+        {% if content.body | render %}
+            {{ content.body }}
+        {% endif %}
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <hr>
+    </div>
+</div>
+
+

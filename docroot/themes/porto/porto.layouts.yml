@@ -1,0 +1,12 @@
+onerowtwocol:
+  label: One Row Two column
+  category: 'Columns: 2'
+  template: templates/porto-onerowtwocol
+  css: css/onerowtwocol.css
+  regions:
+    top:
+        label: Top Content
+    left:
+      label: Left side
+    right:
+      label: Right side

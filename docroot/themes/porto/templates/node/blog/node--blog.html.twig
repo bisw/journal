@@ -1,0 +1,116 @@
+{% set medias = node.field_media %}
+{% set images = node.field_image %}
+{% set display = content.field_blog_display['#items'].getValue()|first.value %}
+{% set createdDate_d = node.getCreatedTime|date('d') %}
+{% set createdDate_m = node.getCreatedTime|date('M') %}
+
+<div class="blog-posts single-post">
+
+    <article class="post post-large blog-single-post">
+
+        {% if display == 'gallery' %}
+
+            {% if images|length %}
+                <div class="post-image">
+                    <div class="owl-carousel owl-theme" data-plugin-options='{"items":1}'>
+                        {% for image  in images %}
+                            <div>
+                                <div class="img-thumbnail">
+                                    <img class="img-responsive" src="{{ file_url(image.entity.fileuri) }}" alt="">
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+
+        {% elseif display == 'video' %}
+
+            {% if medias|length %}
+                <div class="post-video">
+                    {{ medias|first.value|raw }}
+                </div>
+            {% endif %}
+
+        {% elseif display == 'audio' %}
+
+            {% if medias|length %}
+                <div class="post-audio">
+                    {{ medias|first.value|raw }}
+                </div>
+            {% endif %}
+
+        {% elseif display == 'quote' %}
+
+            {% if medias|length %}
+                {{ medias|first.value|raw }}
+            {% endif %}
+
+        {% else %}
+
+            {% if node.field_thumbnail.entity.fileuri %}
+                <div class="post-image single">
+                    <img class="img-thumbnail" src="{{ file_url(node.field_thumbnail.entity.fileuri) }}" alt="">
+                </div>
+            {% endif %}
+
+        {% endif %}
+
+        <div class="post-date">
+            <span class="day">{{ createdDate_d }}</span>
+            <span class="month">{{ createdDate_m }}</span>
+        </div>
+
+        <div class="post-content">comment_count
+
+            <h2><a href="javascript:void(0);">{{ label }}</a></h2>
+
+            <div class="post-meta">
+                <span><i class="fa fa-user"></i> By {{ author_name }} </span>
+                {% if content.field_blog_tag|render %}
+                    <span><i class="fa fa-tag"></i> {{ content.field_blog_tag }} </span>
+                {% endif %}
+                <span><i class="fa fa-comments"></i> <a href="#commentForm">{{ comment_count }} Comments</a></span>
+            </div>
+
+            {% if content.body | render %}
+                {{ content.body }}
+            {% endif %}
+
+            <div class="post-block post-share">
+                <h3 class="heading-primary"><i class="fa fa-share"></i>{{ 'Share this post'|trans }}</h3>
+
+                <!-- AddThis Button BEGIN -->
+                <div class="addthis_toolbox addthis_default_style ">
+                    <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+                    <a class="addthis_button_tweet"></a>
+                    <a class="addthis_button_pinterest_pinit"></a>
+                    <a class="addthis_counter addthis_pill_style"></a>
+                </div>
+                <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=xa-50faf75173aadc53"></script>
+                <!-- AddThis Button END -->
+
+            </div>
+
+            <div class="post-block post-author clearfix">
+                <h3 class="heading-primary"><i class="fa fa-user"></i>{{ 'Author'|trans }}</h3>
+                <div class="img-thumbnail">
+                    {{ author_picture }}
+                </div>
+
+                <p><strong class="name">{{ author_name }}</strong></p>
+
+            </div>
+
+            <div id="commentForm" class="post-block post-comments clearfix">
+                <h3 class="heading-primary"><i class="fa fa-comments"></i>Comments ({{ comment_count }})</h3>
+
+                {{ content.comment }}
+
+            </div>
+
+
+        </div>
+    </article>
+
+</div>

@@ -28,11 +28,15 @@ module:
   help: 0
   history: 0
   image: 0
+  inline_form_errors: 0
   link: 0
+  media: 0
+  media_library: 0
   menu_ui: 0
   node: 0
   options: 0
   page_cache: 0
+  paragraphs_type_permissions: 0
   path: 0
   path_alias: 0
   quickedit: 0

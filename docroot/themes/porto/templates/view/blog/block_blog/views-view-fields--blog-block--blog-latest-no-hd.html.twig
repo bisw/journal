@@ -1,0 +1,28 @@
+{% set thumbnail = row._entity.field_thumbnail %}
+<div class="col-md-4">
+    {% if fields.field_thumbnail %}
+    <img class="img-responsive" src="{{ file_url(thumbnail.entity.fileuri) }}" alt="Blog">
+    {% endif %}
+    <div class="recent-posts mt-md mb-lg">
+        <article class="post">
+            <h5><a class="text-dark" href="{{ fields.path.content }}">{{ fields.title.content }}</a></h5>
+            {% if fields.body %}
+                {{ fields.body.content }}
+            {% endif %}
+            <div class="post-meta">
+                {% if fields.created %}
+                    <span><i class="fa fa-calendar"></i> {{ fields.created.content }} </span>
+                {% endif %}
+                {% if fields.uid %}
+                    <span><i class="fa fa-user"></i> By {{ fields.uid.content }} </span>
+                {% endif %}
+                {% if fields.field_blog_category %}
+                    <span><i class="fa fa-tag"></i>{{ fields.field_blog_category.content }}</span>
+                {% endif %}
+                {% if fields.comment_count %}
+                    <span><i class="fa fa-comments"></i> <a href="#">{{ fields.comment_count.content }} Comments</a></span>
+                {% endif %}
+            </div>
+        </article>
+    </div>
+</div>

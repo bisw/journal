@@ -1,0 +1,27 @@
+{%
+set classes = [
+'block',
+'block-' ~ configuration.provider|clean_class,
+'block-' ~ plugin_id|clean_class,
+]
+
+%}
+<div{{ attributes.addClass(classes) }}>
+    {{ title_prefix }}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="nivo-slider">
+                    <div class="slider-wrapper theme-default">
+                        <div id="nivoSlider" class="nivoSlider">
+                            {{ content.field_image }}
+                        </div>
+                        <div id="htmlcaption" class="nivo-html-caption"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{ content.body }}
+    </div>
+    {{ title_suffix }}
+</div>

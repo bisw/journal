@@ -1,0 +1,11 @@
+<div class="container">
+    <div class="row">
+        <div class="sort-destination-loader sort-destination-loader-showing">
+            <ul class="portfolio-list overlay-content sort-destination lightbox" data-sort-id="portfolio" data-plugin-options='{"delegate": "a.lightbox-portfolio", "type": "image", "gallery": {"enabled": true}}'>
+                {% for row in rows %}
+                    {{ row.content }}
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>

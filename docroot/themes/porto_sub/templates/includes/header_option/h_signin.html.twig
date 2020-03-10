@@ -1,0 +1,119 @@
+{% if header_sticky_option == 'always_sticky' %}
+<header id="header" data-plugin-options='{"stickyEnabled": true, "stickyEnableOnBoxed": true, "stickyEnableOnMobile": true, "stickyStartAt": 0, "stickySetTop": "0", "stickyChangeLogo": false}'>
+    {% else %}
+    <header id="header" data-plugin-options='{"stickyEnabled": true, "stickyEnableOnBoxed": true, "stickyEnableOnMobile": true, "stickyStartAt": 57, "stickySetTop": "-57px", "stickyChangeLogo": true}'>
+        {% endif %}
+    <div class="header-body">
+    <div class="header-container container">
+    <div class="header-row">
+        {% if logopath %}
+            <div class="header-column">
+                <div class="header-logo">
+                    <a href="{{ front_page }}">
+                        <img alt="Porto" width="111" height="54" data-sticky-width="82" data-sticky-height="40" data-sticky-top="33" src="{{ logopath }}">
+                    </a>
+                </div>
+            </div>
+        {% endif %}
+    <div class="header-column">
+    <div class="header-row">
+        {% if page.search %}
+            <div class="header-search hidden-xs">
+                {{ page.search }}
+            </div>
+        {% endif %}
+        {% if page.nav_top %}
+            <nav class="header-nav-top">
+                <ul class="nav nav-pills">
+                    {{ page.nav_top }}
+                </ul>
+            </nav>
+        {% endif %}
+    </div>
+    <div class="header-row">
+    <div class="header-nav {{ navigation_option }}">
+    <button class="btn header-btn-collapse-nav" data-toggle="collapse" data-target=".header-nav-main">
+        <i class="fa fa-bars"></i>
+    </button>
+    <div class="header-nav-main header-nav-main-effect-1 header-nav-main-sub-effect-1 collapse h-signin">
+        <div class="nav-inline">
+        {% if page.primary_menu %}
+            {{ page.primary_menu }}
+        {% endif %}
+        </div>
+        <div class="nav-inline">
+        {% if user  %}
+        <nav>
+            <ul class="nav nav-pills">
+                <li class="dropdown dropdown-mega dropdown-mega-signin signin logged" id="headerAccount">
+                    <a class="dropdown-toggle" href="user">
+                        <i class="fa fa-user"></i> {{ name }}
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <div class="dropdown-mega-content">
+
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <div class="user-avatar">
+                                            {% if picture is not empty %}
+                                            <div class="img-thumbnail">
+                                                <img src="{{ picture }}" alt="">
+                                            </div>
+                                            {% endif %}
+                                            <p><strong>{{ name }}</strong><span>{{ info }}</span></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <ul class="list-account-options">
+                                            <li>
+                                                <a href="user">My Account</a>
+                                            </li>
+                                            <li>
+                                                <a href="user/logout">Log Out</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        {% else %}
+        {% if page.after_menu %}
+            <nav>
+                <ul class="nav nav-pills">
+                    <li class="dropdown dropdown-mega dropdown-mega-signin signin" id="headerAccount">
+                        <a class="dropdown-toggle" href="user">
+                            <i class="fa fa-user"></i> Sign In
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <div class="dropdown-mega-content">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="signin-form">
+                                                <span class="dropdown-mega-sub-title">Sign In</span>
+                                                {{ page.after_menu }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        {% endif %}
+        {% endif %}
+        </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </header>

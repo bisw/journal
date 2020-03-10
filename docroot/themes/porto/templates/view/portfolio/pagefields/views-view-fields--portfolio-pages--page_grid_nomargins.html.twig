@@ -1,0 +1,27 @@
+{% set thumbnail = row._entity.field_thumbnail %}
+{% set categoryIds = fields.field_portfolio_category.content|split(',') %}
+
+<li class="col-md-4 isotope-item m-none p-none {% for categoryId in categoryIds %}{{ 'category' }}{{ categoryId|trim }} {% endfor %}">
+    <div class="portfolio-item m-none">
+        <a href="{{ fields.path.content }}">
+            <span class="thumb-info thumb-info-centered-info thumb-info-no-borders m-none">
+                <span class="thumb-info-wrapper">
+
+                    {% if thumbnail.entity.fileuri %}
+                        <img src="{{ file_url(thumbnail.entity.fileuri) }}" class="img-responsive" alt="">
+                    {% else %}
+                        <img src="http://placehold.it/1170x1170" class="img-responsive" alt="">
+                    {% endif %}
+
+                    <span class="thumb-info-title">
+                        <span class="thumb-info-inner">{{ fields.title.content }}</span>
+                        <span class="thumb-info-type">{{ fields.field_portfolio_category_1.content }}</span>
+                    </span>
+                    <span class="thumb-info-action">
+                        <span class="thumb-info-action-icon"><i class="fa fa-link"></i></span>
+                    </span>
+                </span>
+            </span>
+        </a>
+    </div>
+</li>

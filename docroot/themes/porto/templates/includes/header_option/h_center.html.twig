@@ -1,0 +1,45 @@
+{% if header_sticky_option == 'always_sticky' %}
+<header id="header" data-plugin-options='{"stickyEnabled": true, "stickyEnableOnBoxed": true, "stickyEnableOnMobile": true, "stickyStartAt": 0, "stickySetTop": "0", "stickyChangeLogo": false}'>
+    {% else %}
+<header id="header" data-plugin-options='{"stickyEnabled": true, "stickyEnableOnBoxed": true, "stickyEnableOnMobile": true, "stickyStartAt": 140, "stickySetTop": "-140px"}'>
+{% endif %}
+<div class="header-body">
+<div class="header-top">
+    <div class="container">
+        {% if page.nav_top %}
+            <div class="f-left">
+                {{ page.nav_top }}
+            </div>
+        {% endif %}
+        <div class="header-search hidden-xs">
+            {% if page.search %}
+                {{ page.search }}
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% if logopath %}
+<div class="header-container container">
+    <div class="header-row">
+        <div class="header-column header-column-center">
+            <div class="header-logo">
+                <a href="{{ front_page }}">
+                    <img alt="Porto" width="111" height="54" src="{{ logopath }}">
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+<div class="header-container container header-nav header-nav-center">
+<button class="btn header-btn-collapse-nav" data-toggle="collapse" data-target=".header-nav-main">
+    <i class="fa fa-bars"></i>
+</button>
+<div class="header-nav-main header-nav-main-effect-1 header-nav-main-sub-effect-1 collapse h-center">
+    {% if page.primary_menu %}
+        {{ page.primary_menu }}
+    {% endif %}
+</div>
+</div>
+</div>
+</header>

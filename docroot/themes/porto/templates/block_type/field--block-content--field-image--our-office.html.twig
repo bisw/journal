@@ -1,0 +1,12 @@
+
+{% for key, item in items %}
+    {% set link = file_url(item.content['#item'].entity.fileuri) %}
+    <div class="col-md-4">
+        <a class="img-thumbnail mb-xl" href="{{ link }}" data-plugin-options='{"type":"image"}'>
+            <img class="img-responsive" src="{{ link }}" alt="Office">
+										<span class="zoom">
+											<i class="fa fa-search"></i>
+										</span>
+        </a>
+    </div>
+{% endfor %}

@@ -1,0 +1,66 @@
+/* Add here all your CSS customizations */
+.header {
+  padding-top: 5px;
+  background: lavender !important;
+}
+.header .region.region-header{
+  display: inline-block;
+  width: 100%;
+}
+
+.header .block-system-branding-block {
+  width: 150px;
+  float: left;
+  margin: 10px 50px;
+}
+
+.header .menu--main {
+  float: right;
+}
+.header .menu--main ul.menu li a {
+  font-size: 16px;
+  text-decoration: none;
+}
+
+.header .menu--account {
+  float: right;
+  width: 300px;
+  margin-left: 50px;
+}
+
+.header .menu--account ul.menu,
+.header .menu--main ul.menu {
+  display: inline-block;
+}
+.header .menu--account ul.menu li,
+.header .menu--main ul.menu li {
+  list-style: none;
+  float: left;
+  padding: 5px;
+}
+
+.header .menu--account ul.menu li a{
+  font-size: 16px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.sidebar-left,
+html.no-overflowscrolling .sidebar-left .nano,
+.sidebar-left .sidebar-header .sidebar-toggle,
+.sidebar-left .sidebar-header .sidebar-title {
+  background: #9E9E9E !important;
+}
+
+.sidebar-left .ui-accordion .accordion-title {
+  font-weight: bold;
+  font-size: 18px;
+}
+.sidebar-left .ui-accordion .accordion-block-content ul li a{
+  font-size: 16px;
+  text-decoration: none;
+}
+
+.inner-wrapper .content {
+  padding: 20px;
+}

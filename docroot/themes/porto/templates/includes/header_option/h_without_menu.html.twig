@@ -1,0 +1,18 @@
+<header id="header" data-plugin-options='{"stickyEnabled": false}'>
+	<div class="header-body">
+		<div class="header-top">
+			<div class="container">
+				{% if page.nav_top %}
+					<div class="f-left">
+						{{ page.nav_top }}
+					</div>
+				{% endif %}
+				{% if page.header_social %}
+	                <div class="header-social-icons social-icons hidden-xs">
+	                    {{ page.header_social }}
+	                </div>
+                {% endif %}
+			</div>
+		</div>
+	</div>
+</header>

@@ -1,0 +1,24 @@
+<div class="container">
+    <section class="timeline overlay-content-white" id="timeline">
+        <div class="timeline-body">
+            <div class="timeline-date">
+                <h3 class="heading-primary">{{ "now"|date("F Y") }}</h3>
+            </div>
+
+            {% set countRow = 1 %}
+            {% for row in rows %}
+
+                {% set rowPosition = 'left' %}
+                {% if countRow % 2 == 0 %}
+                    {% set rowPosition = 'right' %}
+                {% endif %}
+
+                <article class="timeline-box {{ rowPosition }}">
+                    {{ row.content }}
+                </article>
+
+                {% set countRow = countRow + 1 %}
+            {% endfor %}
+        </div>
+    </section>
+</div>

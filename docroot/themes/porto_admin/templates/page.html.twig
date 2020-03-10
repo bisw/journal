@@ -1,0 +1,85 @@
+<div id="wrapper">
+    <header class="header">
+        <div class="header-container">
+            <div class="row">
+                {{ page.header }}
+            </div>
+        </div>
+	</header>
+    <div role="main" class="main">
+        <div class="inner-wrapper">
+			<aside id="sidebar-left" class="sidebar-left">
+				<div class="sidebar-header">
+				    <div class="sidebar-title">Navigation</div>
+				    <div class="sidebar-toggle d-none d-md-block" data-toggle-class="sidebar-left-collapsed" data-target="html" data-fire-event="sidebar-left-toggle">
+				        <i class="fas fa-bars" aria-label="Toggle sidebar"></i>
+				    </div>
+				</div>
+
+                <div class="nano">
+				    <div class="nano-content">{{ page.sidebar }}</div>
+                </div>
+
+                <script>
+				    // Maintain Scroll Position
+				    if (typeof localStorage !== 'undefined') {
+				        if (localStorage.getItem('sidebar-left-position') !== null) {
+				            var initialPosition = localStorage.getItem('sidebar-left-position'),
+				            sidebarLeft = document.querySelector('#sidebar-left .nano-content');  
+				            sidebarLeft.scrollTop = initialPosition;
+				        }
+				    }
+				</script>
+            </aside>
+
+            {% if page.highlighted %}
+            <header class="page-header">
+                <div class="container">
+                    <div class="row">
+                        {{ page.highlighted }}
+                    </div>
+                </div>
+			</header>
+            {% endif %}
+
+            {% if page.page_top %}
+            <div class="page-top">
+                <div class="container">
+                    <div class="row">
+                        {{ page.page_top }}
+                    </div>
+                </div>
+			</div>
+            {% endif %}
+
+            <div class="content">
+                <div class="container">
+                    <div class="row">
+                        {{ page.content }}
+                    </div>
+                </div>
+			</div>
+
+            {% if page.page_bottom %}
+            <div class="page-bottom">
+                <div class="container">
+                    <div class="row">
+                        {{ page.page_bottom }}
+                    </div>
+                </div>
+			</div>
+            {% endif %}
+
+            {% if page.footer %}
+            <div class="footer">
+                <div class="container">
+                    <div class="row">
+                        {{ page.footer }}
+                    </div>
+                </div>
+			</div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+

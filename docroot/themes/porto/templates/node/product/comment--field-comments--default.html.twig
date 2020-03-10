@@ -1,0 +1,47 @@
+{% if threaded %}
+    {{ attach_library('classy/indented') }}
+{% endif %}
+{%
+  set classes = [
+    'comment',
+    'js-comment',
+    status != 'published' ? status,
+    comment.owner.anonymous ? 'by-anonymous',
+    author_id and author_id == commented_entity.getOwnerId() ? 'by-' ~ commented_entity.getEntityTypeId() ~ '-author',
+  ]
+%}
+<li{{ attributes.addClass(classes) }}>
+    <div class="comment">
+        <div class="img-thumbnail">
+            {{ user_picture }}
+        </div>
+        <div class="comment-block">
+            <div class="comment-arrow"></div>
+            <span class="comment-by">
+
+                <strong>{{ author|striptags }}</strong>
+
+                <!--span class="pull-right">
+                    <div title="Rated 5.00 out of 5" class="star-rating">
+                        <span style="width:100%"><strong class="rating">5.00</strong> out of 5</span>
+                    </div>
+                </span-->
+            </span>
+
+            {% if title %}
+                {{ title_prefix }}
+                <strong>{{ title|striptags }}</strong>
+                {{ title_suffix }}
+            {% endif %}
+            {{ content }}
+
+            {#{ submitted }#}
+            {#% if parent %}
+                {{ parent }}
+            {% endif %#}
+
+            {#{ permalink }#}
+
+        </div>
+    </div>
+</li>

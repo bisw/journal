@@ -1,0 +1,16 @@
+{%
+    set classes = [
+    'block',
+    'block-' ~ configuration.provider|clean_class,
+    'block-' ~ plugin_id|clean_class,
+]
+%}
+{% set style = content.field_layout_mode[0]['#markup'] %}
+<div{{ attributes.addClass(classes) }}>
+    {{ title_prefix }}
+    <h4>{{ content.field_title[0]['#context']['value'] }}</h4>
+    <div id="accordion" class="panel-group {% if style == 'style1' %}{{ 'panel-group-primary' }}{% elseif style == 'style2' %}{{ 'panel-group-secondary' }}{% elseif style == 'style3' %}{{ 'panel-group-tertiary' }}{% elseif style == 'style4' %}{{ 'panel-group-quaternary' }}{% elseif style == 'style5' %}{{ 'panel-group-sm' }}{% elseif style == 'style6' %}{{ 'panel-group-lg' }}{% endif %}">
+        {{ content.field_content }}
+    </div>
+    {{ title_suffix }}
+</div>

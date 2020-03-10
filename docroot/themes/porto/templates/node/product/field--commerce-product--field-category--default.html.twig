@@ -1,0 +1,50 @@
+{%
+  set classes = [
+    'field',
+    'field--name-' ~ field_name|clean_class,
+    'field--type-' ~ field_type|clean_class,
+    'field--label-' ~ label_display,
+  ]
+%}
+{%
+  set title_classes = [
+    'field__label',
+    label_display == 'visually_hidden' ? 'visually-hidden',
+  ]
+%}
+
+{% if label_hidden %}
+    {% if multiple %}
+        {#<div{{ attributes.addClass(classes, 'field__items') }}>#}
+        {% set countItem = 1 %}
+        {% for item in items %}
+            {#<div{{ item.attributes.addClass('field__item') }}>{{ item.content }}</div>#}
+            {{ item.content }}{% if countItem < items | length %}, {% else %}.{% endif %}
+            {% set countItem = countItem + 1 %}
+        {% endfor %}
+        {#</div>#}
+    {% else %}
+        {% set countItem = 1 %}
+        {% for item in items %}
+            {#<div{{ attributes.addClass(classes, 'field__item') }}>{{ item.content }}</div>#}
+            {{ item.content }}{% if countItem < items | length %}, {% else %}.{% endif %}
+            {% set countItem = countItem + 1 %}
+        {% endfor %}
+    {% endif %}
+{% else %}
+    {#<div{{ attributes.addClass(classes) }}>#}
+    {#<div{{ title_attributes.addClass(title_classes) }}>{{ label }}</div>#}
+    {% if multiple %}
+        <!--div class="field__items"-->
+    {% endif %}
+    {% set countItem = 1 %}
+    {% for item in items %}
+        {#<div{{ item.attributes.addClass('field__item') }}>{{ item.content }}</div>#}
+        {{ item.content }}{% if countItem < items | length %}, {% else %}.{% endif %}
+        {% set countItem = countItem + 1 %}
+    {% endfor %}
+    {% if multiple %}
+        <!--/div-->
+    {% endif %}
+    {#</div>#}
+{% endif %}

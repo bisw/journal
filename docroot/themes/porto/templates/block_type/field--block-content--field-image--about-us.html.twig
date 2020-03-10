@@ -1,0 +1,11 @@
+
+{% for key, item in items %}
+    {% set link = file_url(item.content['#item'].entity.fileuri) %}
+<li>
+    <a title="{{ item.content['#item'].value['alt'] }}" href="{{ link }}">
+        <span class="thumbnail mb-none">
+            <img style="width: 75px;height: 75px" src="{{ link }}" alt="">
+        </span>
+    </a>
+</li>
+{% endfor %}

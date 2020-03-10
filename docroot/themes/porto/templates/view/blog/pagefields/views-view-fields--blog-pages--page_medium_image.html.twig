@@ -1,0 +1,98 @@
+{% set thumbnail = row._entity.field_thumbnail %}
+{% set medias = row._entity.field_media %}
+{% set images = row._entity.field_image %}
+{% set display = fields.field_blog_display.content|trim %}
+{% set createdDate_d = fields.created.content %}
+{% set createdDate_m = fields.created_1.content %}
+{% set tags = fields.field_blog_tag.content|split(',') %}
+{% set tagsContent = fields.field_blog_tag.content|raw %}
+{% set path = fields.path.content %}
+{% set commentCount = fields.comment_count.content %}
+{% set title = fields.title.content %}
+{% set author = fields.uid.content|raw %}
+{% set summary = fields.body.content %}
+
+<article class="post post-medium">
+    <div class="row">
+
+        <div class="col-md-5">
+
+            {% if display == 'gallery' %}
+
+                {% if images|length %}
+                    <div class="post-image">
+                        <div class="owl-carousel owl-theme" data-plugin-options='{"items":1}'>
+                            {% for image  in images %}
+                                <div>
+                                    <div class="img-thumbnail">
+                                        <img class="img-responsive" src="{{ file_url(image.entity.fileuri) }}" alt="">
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endif %}
+
+            {% elseif display == 'video' %}
+
+                {% if medias|length %}
+                    <div class="post-video">
+                        {{ medias|first.value|raw }}
+                    </div>
+                {% endif %}
+
+            {% elseif display == 'audio' %}
+
+                {% if medias|length %}
+                    <div class="post-audio">
+                        {{ medias|first.value|raw }}
+                    </div>
+                {% endif %}
+
+            {% elseif display == 'quote' %}
+
+            {% else %}
+
+                {% if thumbnail.entity.fileuri %}
+                    <div class="post-image single">
+                        <img class="img-thumbnail" src="{{ file_url(thumbnail.entity.fileuri) }}" alt="">
+                    </div>
+                {% else %}
+                    <div class="post-image single">
+                        <img class="img-thumbnail" src="http://placehold.it/1280x500" alt="">
+                    </div>
+                {% endif %}
+
+            {% endif %}
+
+        </div>
+        <div class="col-md-7">
+
+            <div class="post-content">
+
+                {% if display == 'quote' and medias|length %}
+                    {{ medias|first.value|raw }}
+                {% else %}
+                    <h2><a href="{{ path }}">{{ title }}</a></h2>
+                    <p>{{ summary }} [...]</p>
+                {% endif %}
+
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="post-meta">
+                <span><i class="fa fa-calendar"></i> {{ createdDate_d }} </span>
+                <span><i class="fa fa-user"></i> By {{ author }} </span>
+                {% if tags|length %}
+                    <span><i class="fa fa-tag"></i> {{ tagsContent }} </span>
+                {% endif %}
+                <span><i class="fa fa-comments"></i> <a href="{{ path }}#commentForm">{{ commentCount }} Comments</a></span>
+                <a href="{{ path }}" class="btn btn-xs btn-primary pull-right">Read more...</a>
+            </div>
+        </div>
+    </div>
+
+</article>

@@ -1,0 +1,36 @@
+{%
+set classes = [
+'block',
+'block-' ~ configuration.provider|clean_class,
+'block-' ~ plugin_id|clean_class,
+]
+
+%}
+<div{{ attributes.addClass(classes) }}>
+    {{ title_prefix }}
+<div class="container">
+<div class="row">
+    {% if content.body | render  %}
+    <div class="col-md-8">
+        {{ content.body }}
+    </div>
+    {% endif %}
+    <div class="col-md-4">
+        <div class="featured-box featured-box-primary">
+            <div class="box-content">
+                <h4 class="text-uppercase">{{ content.field_title | render | striptags | trim }}</h4>
+                <ul class="thumbnail-gallery" data-plugin-lightbox data-plugin-options='{"delegate": "a", "type": "image", "gallery": {"enabled": true}}'>
+                    {{ content.field_image }}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+    <div class="row">
+        <div class="col-md-12">
+            <hr class="tall">
+        </div>
+    </div>
+</div>
+    {{ title_suffix }}
+</div>

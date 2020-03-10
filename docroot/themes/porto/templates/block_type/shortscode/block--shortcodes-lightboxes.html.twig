@@ -1,0 +1,19 @@
+
+{%
+    set classes = [
+    'block',
+    'block-' ~ configuration.provider|clean_class,
+    'block-' ~ plugin_id|clean_class,
+]
+%}
+{% set style = content.field_layout_mode[0]['#markup'] %}
+<div{{ attributes.addClass(classes) }}>
+    {{ title_prefix }}
+    <h4 class="mb-none">{{ content.field_title[0]['#context']['value'] }}</h4>
+
+    <div class="lightbox mb-lg" data-plugin-options='{"delegate": "a", "type": "image", "gallery": {"enabled": true}}'>
+        {{ content.field_lightboxes_content }}
+
+    </div>
+    {{ title_suffix }}
+</div>

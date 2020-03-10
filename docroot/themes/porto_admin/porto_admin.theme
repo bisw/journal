@@ -1,0 +1,15 @@
+<?php
+
+
+/**
+ * @file
+ * Functions to support theming in the porto sub theme.
+ */
+
+
+/**
+ * Implements hook_preprocess_HOOK() for node.html.twig.
+ */
+function porto_admin_preprocess_node(&$variables) {
+
+}

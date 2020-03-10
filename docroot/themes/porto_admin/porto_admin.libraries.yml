@@ -1,0 +1,43 @@
+global-styling:
+  version: 8.x
+  css:
+    base:
+      css/custom.css: {}
+      css/invoice-print.css: {}
+      css/theme.css: {}
+      css/theme-admin-extension.css: {}
+      css/skins/default.css: {}
+      css/skins/extension.css: {}
+      css/skins/square-borders.css: {}
+      vendor/jquery-ui/jquery-ui.css: {}
+      vendor/jquery-ui/jquery-ui.theme.css: {}
+      vendor/bootstrap-multiselect/bootstrap-multiselect.css: {}
+      vendor/morris/morris.css: {}
+      vendor/bootstrap/css/bootstrap.css: {}
+      vendor/animate/animate.css: {}
+      vendor/font-awesome/css/fontawesome-all.min.css: {}
+      vendor/magnific-popup/magnific-popup.css: {}
+      vendor/bootstrap-datepicker/css/bootstrap-datepicker3.css: {}
+
+
+  js:
+     js/theme.admin.extension.js: {}
+     js/custom.js: {}
+     vendor/modernizr/modernizr.js: {}
+     vendor/popper/umd/popper.min.js: {}
+     vendor/bootstrap/js/bootstrap.js: {}
+     vendor/bootstrap-datepicker/js/bootstrap-datepicker.js: {}
+     vendor/nanoscroller/nanoscroller.js: {}
+     vendor/magnific-popup/jquery.magnific-popup.js: {}
+     vendor/jquery-placeholder/jquery-placeholder.js: {}
+     vendor/jqueryui-touch-punch/jqueryui-touch-punch.js: {}
+     vendor/jquery-appear/jquery-appear.js: {}
+     vendor/bootstrap-multiselect/bootstrap-multiselect.js: {}
+
+  dependencies:
+    - core/jquery
+    - core/drupal.ajax
+    - core/drupal
+    - core/drupalSettings
+    - core/jquery.once
+

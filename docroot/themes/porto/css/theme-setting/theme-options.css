@@ -1,0 +1,81 @@
+.form-item  {margin-top: 8px !important; margin-left: 10px !important;}
+
+.form-type-textfield input {width: 40% !important;}
+
+.fieldset-legend, .options_header {width: 100%;}
+
+#edit-color-scheme .form-item, #edit-background-image .form-item {
+  float: left;
+  line-height: 40px;
+  width: 15%;
+}
+#edit-color-scheme label, #edit-background-image label {
+	border: 1px solid transparent;
+	cursor: pointer;
+	display: inline-block;
+	height: 31px;
+	margin: 5px;
+	vertical-align: top;
+	width: 31px;
+	text-indent: -999em;
+}
+label[for=edit-color-scheme-2d3e50] {
+	background-color:#2d3e50;
+}
+label[for=edit-color-scheme-e7af62] {
+	background-color:#e7af62;
+}
+label[for=edit-color-scheme-f26262] {
+	background-color:#f26262;
+}
+label[for=edit-color-scheme-f64989] {
+	background-color:#f64989;
+}
+label[for=edit-color-scheme-ad86bb] {
+	background-color:#ad86bb;
+}
+label[for=edit-color-scheme-00b988] {
+	background-color:#00b988;
+}
+label[for=edit-color-scheme-c3512f] {
+	background-color:#c3512f;
+}
+label[for=edit-color-scheme-a0ce4e] {
+	background-color:#a0ce4e;
+}
+label[for=edit-color-scheme-627f9a] {
+	background-color:#627f9a;
+}
+label[for=edit-color-scheme-21cdec] {
+	background-color:#21cdec;
+}
+label[for=edit-color-scheme-26476a] {
+	background-color:#26476a;
+}
+label[for=edit-color-scheme-362d50] {
+	background-color:#362d50;
+}
+
+label[for=edit-background-image-upload] {
+	text-indent: unset !important;
+}
+label[for=edit-background-image-bg1] {
+	background-image:url(../../img/background/1-thumb.jpg)
+}
+label[for=edit-background-image-bg2] {
+    background-image:url(../../img/background/2-thumb.jpg)
+}
+label[for=edit-background-image-bg3] {
+    background-image:url(../../img/background/3-thumb.jpg)
+}
+
+
+#edit-background-image {overflow: hidden;}
+
+.form-wrapper {min-height: 20px;}
+
+.fieldset-legend {cursor: pointer;}
+
+.plus {background-image: url('../../img/plus.png');  background-repeat: no-repeat; height: 25px; float: right; width: 25px; margin-top: 8px; margin-right: 25px;}
+.minus {background-image: url('../../img/minus.png');  background-repeat: no-repeat; height: 25px; float: right; width: 25px; margin-top: 8px; margin-right: 25px;}
+

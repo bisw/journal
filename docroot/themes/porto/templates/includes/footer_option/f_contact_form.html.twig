@@ -1,0 +1,33 @@
+<footer class="short f-contact {% if footer_color_option != 'none' %} color {{ footer_color_option }}{% endif %}" id="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5">
+                {% if page.footer_17 %}
+                    {{ page.footer_17 }}
+                {% endif %}
+                {% if page.footer_21 %}
+                    {{ page.footer_21 }}
+                {% endif %}
+            </div>
+            {% if page.footer_37 %}
+            <div class="col-md-3">
+                {{ page.footer_37 }}
+            </div>
+            {% endif %}
+            {% if page.footer_47 %}
+            <div class="col-md-4">
+                {{ page.footer_47 }}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    {% if page.footer_bottom_237 %}
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                {{ page.footer_bottom_237 }}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</footer>

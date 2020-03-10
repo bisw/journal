@@ -1,0 +1,25 @@
+<footer id="footer" class="light narrow {% if footer_color_option != 'none' %} color {{ footer_color_option }}{% endif %}">
+    <div class="container">
+        <div class="row">
+            {% if page.footer_15 %}
+            <div class="col-md-9">
+                {{ page.footer_15 }}
+            </div>
+            {% endif %}
+            {% if page.footer_25 %}
+            <div class="col-md-3">
+                {{ page.footer_25 }}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    {% if page.footer_bottom_5 %}
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                {{ page.footer_bottom_5 }}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</footer>

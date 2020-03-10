@@ -1,0 +1,35 @@
+<footer class="short {% if footer_color_option != 'none' %} color {{ footer_color_option }}{% endif %}" id="footer">
+    <div class="container">
+        <div class="row">
+            {% if page.footer_16 %}
+            <div class="col-md-3">
+                {{ page.footer_16 }}
+            </div>
+            {% endif %}
+            {% if page.footer_26 %}
+            <div class="col-md-3">
+                {{ page.footer_26 }}
+            </div>
+            {% endif %}
+            {% if page.footer_36 %}
+            <div class="col-md-3">
+                {{ page.footer_36 }}
+            </div>
+            {% endif %}
+            {% if page.footer_46 %}
+            <div class="col-md-3">
+                {{ page.footer_46 }}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    {% if page.footer_bottom_6 %}
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                {{ page.footer_bottom_6 }}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</footer>

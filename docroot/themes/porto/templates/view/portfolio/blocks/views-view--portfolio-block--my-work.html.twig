@@ -1,0 +1,52 @@
+{%
+set classes = [
+dom_id ? 'js-view-dom-id-' ~ dom_id,
+]
+%}
+
+<div{{ attributes.addClass(classes) }}>
+    {{ title_prefix }}
+    {{ title }}
+    {#  {{ title_suffix }}#}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                {% if header %}
+                {{ header }}
+                {% endif %}
+                <div class="row">
+                    <ul class="portfolio-list">
+                        {{ rows }}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{ exposed }}
+    {{ attachment_before }}
+
+    {{ empty }}
+    {{ pager }}
+
+    {{ attachment_after }}
+    {{ more }}
+
+    {% if footer %}
+        <footer>
+            {{ footer }}
+        </footer>
+    {% endif %}
+
+    {{ feed_icons }}
+</div>
+
+
+
+
+
+
+
+
+
+
+

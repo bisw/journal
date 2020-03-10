@@ -1,0 +1,20 @@
+<div class="mb-lg">
+    <div class="portfolio-item">
+        <span class="thumb-info thumb-info-lighten thumb-info-no-zoom thumb-info-hide-wrapper-bg">
+            <span class="thumb-info-wrapper">
+                <a href="{{ url }}">
+                    {% if content.field_thumbnail %}
+                        {{ content.field_thumbnail }}
+                    {% endif %}
+                </a>
+                <span class="thumb-info-title">
+                    <span class="thumb-info-inner">{{ label }}</span>
+                    <span class="thumb-info-type">{{ content.field_portfolio_category }}</span>
+                </span>
+                <span class="thumb-info-action">
+                    <span class="thumb-info-action-icon"><i class="fa fa-link"></i></span>
+                </span>
+            </span>
+        </span>
+    </div>
+</div>

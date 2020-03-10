@@ -1,0 +1,47 @@
+{%
+set classes = [
+'block',
+'block-' ~ configuration.provider|clean_class,
+'block-' ~ plugin_id|clean_class,
+]
+%}
+{% set style = content.field_style[0]['#markup'] %}
+
+<div{{ attributes.addClass(classes) }}>
+    {{ title_prefix }}
+        {% if style == 'style 2' %}
+            <div class="container">
+                {% if content.field_large_image | render %}
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="owl-carousel owl-theme mb-none" data-plugin-options='{"items": 1, "animateOut": "fadeOut", "autoplay": true, "autoplayTimeout": 3000}'>
+                            {{ content.field_large_image }}
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="tall">
+                {% endif %}
+                <div class="row">
+                    <div class="col-md-7">
+                        {{ content.body }}
+                        <div data-plugin-lightbox data-plugin-options='{"delegate": "a", "type": "image", "gallery": {"enabled": true}}'>
+                            <div class="row">
+                               {{ content.field_image }}
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-5">
+                        {{ content.field_contact }}
+                    </div>
+                </div>
+
+            </div>
+        {% else %}
+        <div class="row lightbox mg-top-10" data-plugin-options='{"delegate": "a", "type": "image", "gallery": {"enabled": true}}'>
+            {{ content.field_image }}
+        </div>
+        {% endif %}
+    {{ title_suffix }}
+</div>

@@ -1,0 +1,32 @@
+{% set thumbnails = node.field_thumbnail %}
+<div class="col-md-3 col-sm-6 col-xs-12">
+    <span class="thumb-info thumb-info-hide-wrapper-bg">
+        <span class="thumb-info-wrapper">
+            <a href="{{ url }}">
+                {% for thumbnail  in thumbnails %}
+                    <img src="{{ file_url(thumbnail.entity.fileuri) }}" alt="" class="img-responsive">
+                {% endfor %}
+                <span class="thumb-info-title">
+                    <span class="thumb-info-inner">{{ label }}</span>
+                    <span class="thumb-info-type">{{ content.field_team_job | render | striptags }}</span>
+                </span>
+            </a>
+        </span>
+        <span class="thumb-info-caption">
+            {% if content.body | render %}
+            <span class="thumb-info-caption-text">{{ content.body | render | striptags}}</span>
+            {% endif %}
+            <span class="thumb-info-social-icons">
+                {% if content.field_facebook_link | render %}
+                <a target="_blank" href="{{ content.field_facebook_link | render | striptags}}"><i class="fa fa-facebook"></i><span>Facebook</span></a>
+                {% endif %}
+                {% if content.field_twitter_link | render %}
+                <a href="{{ content.field_twitter_link | render | striptags}}"><i class="fa fa-twitter"></i><span>Twitter</span></a>
+                {% endif %}
+                {% if content.field_linkedin_link | render %}
+                <a href="{{ content.field_linkedin_link | render | striptags}}"><i class="fa fa-linkedin"></i><span>Linkedin</span></a>
+                {% endif %}
+            </span>
+        </span>
+    </span>
+</div>

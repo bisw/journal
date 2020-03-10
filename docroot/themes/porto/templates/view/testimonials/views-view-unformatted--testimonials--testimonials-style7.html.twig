@@ -1,0 +1,14 @@
+{% if title %}
+    <h3>{{ title }}</h3>
+{% endif %}
+{% set i = 1 %}
+    {% for row in rows %}
+        {% set i = i+1 %}
+        {% if i is divisible by(2) %}
+            <div class="row mt-xl">
+        {% endif %}
+        {{ row.content }}
+        {% if i is not divisible by(2) %}
+            </div>
+        {% endif %}
+{% endfor %}

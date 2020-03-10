@@ -1,0 +1,40 @@
+{%
+set classes = [
+dom_id ? 'js-view-dom-id-' ~ dom_id,
+]
+%}
+
+<div{{ attributes.addClass(classes) }}>
+    {{ title_prefix }}
+    {{ title }}
+    {#  {{ title_suffix }}#}
+    <div class="container">
+        <div class="row mt-xl">
+            <div class="col-md-12 center">
+                {% if header %}
+                <h2 class="mt-xl mb-xl">{{ header }}</h2>
+                {% endif %}
+            </div>
+        </div>
+        <div class="row">
+            {{ rows }}
+        </div>
+    </div>
+
+    {{ exposed }}
+    {{ attachment_before }}
+
+    {{ empty }}
+    {{ pager }}
+
+    {{ attachment_after }}
+    {{ more }}
+
+    {{ feed_icons }}
+</div>
+
+
+
+
+
+

@@ -1,0 +1,21 @@
+{% set thumbnail = row._entity.field_thumbnail %}
+<li class="isotope-item">
+    <div class="image-gallery-item mb-none">
+        <a href="{{ fields.path.content }}">
+            <span class="thumb-info thumb-info-centered-info thumb-info-no-borders">
+                <span class="thumb-info-wrapper">
+                    <img src="{{ file_url(thumbnail.entity.fileuri) }}" class="img-responsive" alt="">
+                    <span class="thumb-info-title">
+                        {% if fields.title %}
+                        <span class="thumb-info-inner">{{ fields.title.content }}</span>
+                        {% endif %}
+                        <span class="thumb-info-type">Project Type</span>
+                    </span>
+                    <span class="thumb-info-action">
+                        <span class="thumb-info-action-icon"><i class="fa fa-link"></i></span>
+                    </span>
+                </span>
+            </span>
+        </a>
+    </div>
+</li>

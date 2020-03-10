@@ -1,0 +1,10 @@
+{% for key, item in items %}
+    {% set link = file_url(item.content['#field_collection_item'].field_image.entity.fileuri) %}
+    {% set tid = item.content['#field_collection_item'].item_id.value %}
+    <section class="toggle">
+        <label>{{ item.content['#field_collection_item'].field_title.value }}</label>
+        <div class="toggle-content">
+            <p>{{ item.content['#field_collection_item'].field_description.value | striptags }}</p>
+        </div>
+    </section>
+{% endfor %}

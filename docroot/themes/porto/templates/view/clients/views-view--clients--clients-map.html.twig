@@ -1,0 +1,42 @@
+{%
+  set classes = [
+    dom_id ? 'js-view-dom-id-' ~ dom_id,
+  ]
+%}
+<div{{ attributes.addClass(classes) }}>
+  {{ title_prefix }}
+  {{ title }}
+ {#{{ title_suffix }}#}
+    {% if header %}
+        {{ header }}
+    {% endif %}
+    <section class="section section-custom-map-2">
+        <section class="section section-default section-footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="owl-carousel owl-theme" data-plugin-options='{"items": 6, "autoplay": true, "autoplayTimeout": 3000}'>
+                            {{ rows }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+  {{ exposed }}
+  {{ attachment_before }}
+
+  {{ empty }}
+  {{ pager }}
+
+  {{ attachment_after }}
+  {{ more }}
+
+  {% if footer %}
+    <footer>
+      {{ footer }}
+    </footer>
+  {% endif %}
+
+  {{ feed_icons }}
+</div>

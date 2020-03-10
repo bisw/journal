@@ -1,0 +1,69 @@
+{%
+    set classes = [
+    'block',
+    'block-' ~ configuration.provider|clean_class,
+    'block-' ~ plugin_id|clean_class,
+]
+%}
+{% set style = content.field_layout_tabs[0]['#markup'] %}
+<div{{ attributes.addClass(classes) }}>
+    {{ title_prefix }}
+    <h4>{{ content.field_title[0]['#context']['value'] }}</h4>
+    {% if style == 'style1' %}
+        <div class="tabs">
+            <ul class="nav nav-tabs text-right tabs-primary">
+            {{ content.field_tabs_title }}
+            </ul>
+            <div class="tab-content">
+                {{ content.field_tabs_content }}
+            </div>
+        </div>
+    {% elseif style == 'style2' %}
+        <div class="tabs tabs-bottom">
+            <div class="tab-content">
+                {{ content.field_tabs_content }}
+            </div>
+            <ul class="nav nav-tabs">
+                {{ content.field_tabs_title }}
+            </ul>
+        </div>
+    {% elseif style == 'style3' %}
+        <div class="tabs">
+            <ul class="nav nav-tabs nav-justified">
+                {{ content.field_tabs_title }}
+            </ul>
+            <div class="tab-content">
+                {{ content.field_tabs_content }}
+            </div>
+        </div>
+    {% elseif style == 'style4' %}
+        <div class="tabs tabs-bottom tabs-primary">
+            <div class="tab-content">
+                {{ content.field_tabs_content }}
+            </div>
+            <ul class="nav nav-tabs nav-justified">
+                {{ content.field_tabs_title }}
+            </ul>
+        </div>
+    {% elseif style == 'style5' %}
+        <div class="tabs tabs-vertical tabs-left">
+            <ul class="nav nav-tabs col-sm-3">
+                {{ content.field_tabs_title }}
+            </ul>
+            <div class="tab-content">
+                {{ content.field_tabs_content }}
+            </div>
+        </div>
+    {% else %}
+        <div class="tabs">
+            <ul class="nav nav-tabs">
+                {{ content.field_tabs_title }}
+            </ul>
+            <div class="tab-content">
+                {{ content.field_tabs_content }}
+            </div>
+        </div>
+    {% endif %}
+
+    {{ title_suffix }}
+</div>

@@ -1,0 +1,23 @@
+{% set thumbnail = row._entity.field_thumbnail %}
+<div class="col-md-6">
+    <div class="testimonial testimonial-style-4 appear-animation" data-appear-animation="fadeInLeft" data-appear-animation-delay="0">
+        {% if fields.body %}
+            <blockquote>
+                {{ fields.body.content }}
+            </blockquote>
+        {% endif %}
+        <div class="testimonial-arrow-down"></div>
+        <div class="testimonial-author">
+            {% if fields.field_thumbnail %}
+            <div class="testimonial-author-thumbnail">
+                <img src="{{ file_url(thumbnail.entity.fileuri) }}" class="img-responsive img-circle" alt="">
+            </div>
+            {% endif %}
+            <p><strong>{{ fields.title.content }}</strong>
+                {% if fields.field_testimonial_info %}
+                    <span>{{ fields.field_testimonial_info.content }}</span>
+                {% endif %}
+            </p>
+        </div>
+    </div>
+</div>

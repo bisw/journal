@@ -1,0 +1,64 @@
+{% set thumbnail = row._entity.field_thumbnail %}
+{% set categoryIds = fields.field_portfolio_category.content|split(',') %}
+{% set skills = fields.field_portfolio_skills.content|split(',') %}
+
+<li class="col-md-12 isotope-item mt-xl {% for categoryId in categoryIds %}{{ 'category' }}{{ categoryId|trim }} {% endfor %}">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="portfolio-item">
+                <a href="{{ fields.path.content }}">
+                    <span class="thumb-info thumb-info-no-zoom thumb-info-lighten">
+                        <span class="thumb-info-wrapper">
+
+                            {% if thumbnail.entity.fileuri %}
+                                <img src="{{ file_url(thumbnail.entity.fileuri) }}" class="img-responsive" alt="">
+                            {% else %}
+                                <img src="http://placehold.it/1170x540" class="img-responsive" alt="">
+                            {% endif %}
+
+                            <span class="thumb-info-action">
+                                <span class="thumb-info-action-icon"><i class="fa fa-link"></i></span>
+                            </span>
+                        </span>
+                    </span>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="portfolio-info">
+                <div class="row">
+                    <div class="col-md-12 center">
+                        <ul>
+                            <li>
+                                <i class="fa fa-calendar"></i> {{ fields.created.content }}
+                            </li>
+                            <li>
+                                <i class="fa fa-tags"></i> {{ fields.field_portfolio_category_1.content }}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <h4 class="heading-primary">{{ fields.title.content }}</h4>
+            <p class="mt-xlg">{{ fields.body.content }}</p>
+
+            <a href="{{ fields.path.content }}" class="btn btn-primary">Learn More</a>
+
+            {% if skills|length %}
+                <ul class="portfolio-details">
+                    <li>
+                        <p><strong>Skills:</strong></p>
+
+                        <ul class="list list-inline list-icons">
+                            {% for skill in skills %}
+                                <li><i class="fa fa-check-circle"></i> {{ skill|trim }}</li>
+                                {% endfor %}
+                        </ul>
+                    </li>
+                </ul>
+            {% endif %}
+
+        </div>
+    </div>
+</li>

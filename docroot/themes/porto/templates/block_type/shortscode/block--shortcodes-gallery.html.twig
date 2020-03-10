@@ -1,0 +1,15 @@
+{%
+    set classes = [
+    'block',
+    'block-' ~ configuration.provider|clean_class,
+    'block-' ~ plugin_id|clean_class,
+]
+%}
+{% set style = content.field_layout_mode[0]['#markup'] %}
+<div{{ attributes.addClass(classes) }}>
+    {{ title_prefix }}
+    <ul class="image-gallery sort-destination full-width">
+        {{ content.field_gallery_content }}
+    </ul>
+    {{ title_suffix }}
+</div>

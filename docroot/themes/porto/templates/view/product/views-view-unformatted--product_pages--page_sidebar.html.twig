@@ -1,0 +1,11 @@
+<div class="row">
+    <div class="masonry-loader masonry-loader-showing">
+        <ul class="products product-thumb-info-list" data-plugin-masonry data-plugin-options='{"layoutMode": "fitRows"}'>
+            {% for row in rows %}
+                <li class="col-md-4 col-sm-6 col-xs-12 product">
+                    {{ row.content }}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>

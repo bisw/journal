@@ -1,0 +1,59 @@
+{% if threaded %}
+    {{ attach_library('classy/indented') }}
+{% endif %}
+{%
+  set classes = [
+    'comment',
+    'js-comment',
+    status != 'published' ? status,
+    comment.owner.anonymous ? 'by-anonymous',
+    author_id and author_id == commented_entity.getOwnerId() ? 'by-' ~ commented_entity.getEntityTypeId() ~ '-author',
+  ]
+%}
+
+<li class="comment-item">
+    <div class="comment">
+
+        <div class="img-thumbnail">
+            {{ user_picture }}
+        </div>
+
+        <div class="comment-block">
+
+            <div class="comment-arrow"></div>
+
+            <span class="comment-by">
+                <strong>{{ author }}</strong>
+            </span>
+
+            {% if title %}
+                {{ title_prefix }}
+                <p{{ title_attributes }}><strong>{{ title|striptags }}</strong></p>
+                {{ title_suffix }}
+            {% endif %}
+
+            {{ content }}
+
+            <span class="date pull-right">{{ created }}</span>
+
+            {#
+            <article{{ attributes.addClass(classes) }}>
+                <mark class="hidden" data-comment-timestamp="{{ new_indicator_timestamp }}"></mark>
+
+                <footer class="comment__meta">
+
+                    <p class="comment__submitted">{{ submitted }}</p>
+
+                    {% if parent %}
+                        <p class="parent visually-hidden">{{ parent }}</p>
+                    {% endif %}
+
+                    {{ permalink }}
+                </footer>
+
+                <div{{ content_attributes.addClass('content') }}></div>
+            </article>
+            #}
+        </div>
+    </div>
+</li>

@@ -1,0 +1,47 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="blog-posts">
+
+            <section class="timeline">
+
+                <input type="hidden" id="blogShowNumber" value="4"/>
+
+                <div class="timeline-body">
+                    <div class="timeline-date">
+                        <h3 class="heading-primary">{{ "now"|date("F Y") }}</h3>
+                    </div>
+
+                    <div id="blogLoadMoreWrapper">
+                        {% set countRow = 1 %}
+                        {% for row in rows %}
+
+                            {% set rowPosition = 'left' %}
+                            {% if countRow % 2 == 0 %}
+                                {% set rowPosition = 'right' %}
+                            {% endif %}
+
+                            <article class="timeline-box {{ rowPosition }} post post-medium">
+                                {{ row.content }}
+                            </article>
+
+                            {% set countRow = countRow + 1 %}
+                        {% endfor %}
+                    </div>
+
+                    <div class="timeline-date" id="blogLoadMore">
+                        <h3 class="heading-primary"><a href="javascript:void(0);">Load More...</a></h3>
+                    </div>
+
+                    <div id="blogLoadMoreLoader" class="portfolio-load-more-loader">
+                        <div class="bounce-loader">
+                            <div class="bounce1"></div>
+                            <div class="bounce2"></div>
+                            <div class="bounce3"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+        </div>
+    </div>
+</div>

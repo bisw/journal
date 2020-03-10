@@ -1,0 +1,18 @@
+{% extends "block.html.twig" %}
+{#
+/**
+ * @file
+ * Theme override for tabs.
+ */
+#}
+{% block content %}
+  {% if content %}
+  	<div class="container">
+  		<div class="row">
+		    <nav class="tabs" role="navigation" aria-label="{{ 'Tabs'|t }}">
+		      {{ content }}
+		    </nav>
+		</div>
+    </div>
+  {% endif %}
+{% endblock %}

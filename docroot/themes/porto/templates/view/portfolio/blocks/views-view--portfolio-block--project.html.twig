@@ -1,0 +1,52 @@
+{%
+  set classes = [
+    dom_id ? 'js-view-dom-id-' ~ dom_id,
+  ]
+%}
+
+<div{{ attributes.addClass(classes) }}>
+  {{ title_prefix }}
+  {{ title }}
+{#  {{ title_suffix }}#}
+
+
+    <section class="section mt-xl pb-none">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 center">
+                    {% if header %}
+                        <h2 class="mb-xl">{{ header }}</h2>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <ul class="image-gallery sort-destination full-width mb-none">
+            {{ rows }}
+        </ul>
+    </section>
+    {{ exposed }}
+  {{ attachment_before }}
+
+  {{ empty }}
+  {{ pager }}
+
+  {{ attachment_after }}
+  {{ more }}
+
+  {% if footer %}
+    <footer>
+      {{ footer }}
+    </footer>
+  {% endif %}
+
+  {{ feed_icons }}
+</div>
+
+
+
+
+
+
+
+
+

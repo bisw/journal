@@ -1,0 +1,27 @@
+{%
+    set classes = [
+    'block',
+    'block-' ~ configuration.provider|clean_class,
+    'block-' ~ plugin_id|clean_class,
+]
+%}
+{% set style = content.field_layout_carousels[0]['#markup'] %}
+<div{{ attributes.addClass(classes) }}>
+    {{ title_prefix }}
+        <h4>{{ content.field_title[0]['#context']['value'] }}</h4>
+        {% if style == 'style1' %}
+            <div class="owl-carousel owl-theme show-nav-title" data-plugin-options='{"items": 1, "margin": 10, "loop": false, "nav": true, "dots": false}'>
+            {{ content.field_carousels_content }}
+            </div>
+        {% elseif style == 'style2' %}
+            <div class="owl-carousel owl-theme show-nav-hover" data-plugin-options='{"items": 1, "margin": 10, "loop": false, "nav": true, "dots": false}'>
+            {{ content.field_carousels_content }}
+            </div>
+        {% else %}
+            <div class="owl-carousel owl-theme stage-margin" data-plugin-options='{"items": 1, "margin": 10, "loop": false, "nav": true, "dots": false}'>
+                {{ content.field_carousels_content }}
+            </div>
+        {% endif %}
+
+    {{ title_suffix }}
+</div>

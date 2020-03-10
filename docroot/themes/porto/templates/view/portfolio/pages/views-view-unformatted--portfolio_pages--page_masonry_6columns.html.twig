@@ -1,0 +1,11 @@
+<div class="container">
+    <div class="row">
+        <div class="sort-destination-loader sort-destination-loader-showing">
+            <ul class="portfolio-list sort-destination" data-sort-id="portfolio">
+                {% for row in rows %}
+                    {{ row.content }}
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>

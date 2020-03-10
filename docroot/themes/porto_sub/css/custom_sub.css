@@ -1,0 +1,294 @@
+/*=======================================================================
+*** PORTO_SUB STYLE SHEET***
+========================================================================*/
+
+/* ------ Language block -------*/
+body {
+  color: #518ECC;
+}
+
+table {
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 20px;
+}
+
+.page-header {
+  background-color: #aee2f8;
+  border-bottom: 5px solid #fff;
+  border-top: 5px solid #B2BEB5;
+  margin: 0 0 35px 0;
+  min-height: 50px;
+  padding: 15px 0;
+  position: relative;
+  text-align: left;
+  border-top-width: 0;
+}
+
+.language-switcher-locale-url {
+  float: right;
+  display: inline-block;
+  margin: 8px 0 0 10px;
+}
+.language-switcher-locale-url li {
+  list-style: none;
+  display: inline-block;
+  margin: 0 5px;
+}
+.language-switcher-locale-url li a {
+  color: #fff;
+  display: inline-block;
+  background-size: 30px 20px;
+  background-repeat: no-repeat;
+  width: 30px;
+  height: 20px;
+  text-indent: -9999px;
+}
+.language-switcher-locale-url li.en a {
+  background-image: url('../images/english-flag.svg');
+}
+.language-switcher-locale-url li.de a {
+  background-image: url('../images/deutsche-flag.svg');
+}
+
+.header-nav-main nav {
+  display: inline-block;
+}
+
+.form-select {
+  display: block;
+  height: 34px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+  -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+  -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+.node-article-form,
+.node-article-edit-form {
+  width: 100%;
+}
+.node-article-edit-form .field--name-title,
+.node-article-edit-form .field--name-field-year-of-publication,
+.node-article-edit-form .field--name-field-starting-page,
+.node-article-edit-form .field--name-body,
+.node-article-edit-form .field--name-field-download-price-in-euro,
+.node-article-edit-form .field--name-field-authors .field--name-field-first-name,
+.node-article-form .field--name-title,
+.node-article-form .field--name-field-year-of-publication,
+.node-article-form .field--name-field-starting-page,
+.node-article-form .field--name-body,
+.node-article-form .field--name-field-download-price-in-euro,
+.node-article-form .field--name-field-authors .field--name-field-first-name,
+.node-article-edit-form .field--name-field-page-division,
+.node-article-form .field--name-field-page-division,
+.node-article-form .field--name-field-image,
+.node-article-edit-form .field--name-field-image {
+  margin-right: 8%;
+  float: left;
+}
+.node-article-edit-form .field--name-field-year-of-publication .label,
+.node-article-form .field--name-field-year-of-publication .label{
+  display: inline-block;
+}
+.node-article-edit-form .field--name-title,
+.node-article-edit-form .field--name-field-sub-title,
+.node-article-edit-form .field--name-field-year-of-publication,
+.node-article-edit-form .field--name-field-starting-page,
+.node-article-edit-form .field--name-field-ending-page,
+.node-article-edit-form .field--name-body,
+.node-article-edit-form .field--name-field-abstract,
+.node-article-edit-form .field--name-field-open-access-amount-in-euro,
+.node-article-edit-form .field--name-field-attach-pdf-article,
+.node-article-edit-form .field--name-field-page-division,
+.node-article-edit-form .field--name-field-doi-number,
+.node-article-form .field--name-title,
+.node-article-form .field--name-field-sub-title,
+.node-article-form .field--name-field-year-of-publication,
+.node-article-form .field--name-field-starting-page,
+.node-article-form .field--name-field-ending-page,
+.node-article-form .field--name-body,
+.node-article-form .field--name-field-abstract,
+.node-article-form .field--name-field-open-access-amount-in-euro,
+.node-article-form .field--name-field-attach-pdf-article,
+.node-article-form .field--name-field-page-division,
+.node-article-form .field--name-field-doi-number,
+.node-article-form .field--name-field-image,
+.node-article-edit-form .field--name-field-image {
+  float: left;
+  width: 46%;
+}
+.node-article-edit-form .field--name-field-journal-category select,
+.node-article-edit-form .field--name-field-download-price-in-euro,
+.node-article-form .field--name-field-journal-category select,
+.node-article-form .field--name-field-download-price-in-euro {
+  width: 46%;
+}
+.node-article-edit-form .field--name-field-year-of-publication
+.node-article-form .field--name-field-year-of-publication {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+.node-article-edit-form .field--name-field-year-of-publication input,
+.node-article-edit-form .field--name-field-starting-page input,
+.node-article-edit-form .field--name-field-ending-page input,
+.node-article-edit-form .field--name-field-download-price-in-euro input,
+.node-article-edit-form .field--name-field-open-access-amount-in-euro input,
+.node-article-form .field--name-field-year-of-publication input,
+.node-article-form .field--name-field-starting-page input,
+.node-article-form .field--name-field-ending-page input,
+.node-article-form .field--name-field-download-price-in-euro input,
+.node-article-form .field--name-field-open-access-amount-in-euro input {
+  width: 100%;
+}
+.node-article-edit-form .field--name-field-volume-number input .form-type-radio,
+.node-article-edit-form .field--name-field-volume-number input .form-type-radio {
+  width: 100%;
+}
+.node-article-edit-form .field--name-field-authors .js-form-wrapper .paragraph-type-top,
+.node-article-edit-form .field--name-field-authors #field-authors-values .label,
+.node-article-form .field--name-field-authors .js-form-wrapper .paragraph-type-top,
+.node-article-form .field--name-field-authors #field-authors-values .label {
+  display: none;
+}
+.node-article-edit-form .field--name-field-authors .field--name-field-first-name,
+.node-article-form .field--name-field-authors .field--name-field-first-name  {
+  margin-right: 8%;
+  float: left;
+  width: 44%;
+}
+.node-article-edit-form .field--name-field-authors .field--name-field-last-name,
+.node-article-form .field--name-field-authors .field--name-field-last-name {
+  width: 48%;
+  float: left;
+}
+.node-article-edit-form .field--name-field-reference  #field-reference-values, 
+.node-article-form .field--name-field-reference  #field-reference-values {
+  width: 100%;
+}
+.node-article-edit-form .field--name-field-month label,
+.node-article-edit-form .field--name-field-year label,
+.node-article-form .field--name-field-month label,
+.node-article-form .field--name-field-year label{
+  display: none;
+}
+.node-article-edit-form .field--name-field-year,
+.node-article-form .field--name-field-year {
+  float: left;
+}
+.node-article-edit-form #volume-wrapper,
+.node-article-form #volume-wrapper {
+  float: right;
+  width: 46%;
+}
+.node-article-edit-form #edit-field-volume-number--wrapper,
+.node-article-form #edit-field-volume-number--wrapper {
+  margin: 0;
+}
+.group-year-of-publication .details-wrapper {
+  padding-bottom: 80px;
+}
+
+.page-node-type-article .reference {
+  margin-top: 20px;
+}
+ 
+
+/* Dashboard menu*/
+.editor-dashboard {
+  padding: 0!important;
+  text-align: right;
+  margin: -25px 0 25px 0;
+  color: #aa222e;
+}
+.editor-dashboard li {
+  list-style: none;
+  float: left;
+  margin-left: 10px;
+}
+.editor-dashboard li a {
+  color: #aa222e;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+/* Article list*/
+/*
+.page-node-edit table thead tr {
+  background: none;
+  color: inherit;
+}
+.page-node-edit table tbody tr {
+  background: inherit;
+}
+.page-node-edit table tbody tr:hover {
+  background: inherit;
+}
+.page-node-edit table tbody tr:hover td {
+  padding: 0;
+}
+.view .view-content .views-table thead tr {
+  background: #aee2f8;
+  color: #aa222e;
+}
+.view .view-content .views-table thead tr th {
+  font-weight: normal;
+}
+.view .view-content .views-table thead tr th a {
+  color: #aa222e;
+}
+.view .view-content .views-table tbody tr {
+  background-color: #fff;
+}
+.view .view-content .views-table tbody tr td.views-field-title a {
+  padding-bottom: 0;
+}
+.view .view-content .views-table tbody tr td.views-field-field-authors ul {
+  margin: 0;
+  padding-left: 0;
+}
+.view .view-content .views-table tbody tr td.views-field-field-authors ul li {
+  list-style: none;
+}
+.view .view-content .views-table tbody tr td.views-field-field-authors ul li .field {
+  display: inline-block;
+}
+.view .view-content .views-table tbody tr td.views-field-field-authors ul li .field-name-field-authors-last-name {
+  margin-left: 5px;
+}
+.view .view-content .views-table tbody tr:hover {
+  background: #e6e6e6 url("../images/ui-bg_glass_75_e6e6e6_1x400.png") repeat-x scroll 50% 50%;
+  color: #212121; 
+}
+.view .view-content .views-table tbody tr:hover a {
+  color: #212121; 
+}
+.view .view-content .views-table tbody tr:hover td {
+  padding: 10px 8px; 
+}
+*/
+/* Pagination */
+/*
+.pagination li.active a {
+  background-color: #518ecc !important;
+  border-color: #518ecc;
+}
+.pagination li.active:hover a {
+  background-color: #aee2f8 !important;
+  border-color: #aee2f8;
+}
+.pagination li a {
+  color: #518ecc;
+}
+.pagination li:hover a {
+  color: #518ecc;
+}
+*/

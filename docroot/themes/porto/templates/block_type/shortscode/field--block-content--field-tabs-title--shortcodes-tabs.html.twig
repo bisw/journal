@@ -1,0 +1,9 @@
+{% for key, item in items %}
+{% set title = item.content['#field_collection_item'].field_tbs_title.value %}
+{% set id = item.content['#field_collection_item'].field_tbs_link.value %}
+{% set add_class = item.content['#field_collection_item'].field_tabs_class.value %}
+<li class="{{ add_class }}">
+    <a href="#{{ id }}" data-toggle="tab">{{ title }}</a>
+</li>
+{% endfor %}
+

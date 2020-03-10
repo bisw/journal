@@ -1,0 +1,55 @@
+{%
+set classes = [
+dom_id ? 'js-view-dom-id-' ~ dom_id,
+]
+%}
+
+<div{{ attributes.addClass(classes) }}>
+    {{ title_prefix }}
+    {{ title }}
+    {#  {{ title_suffix }}#}
+
+    <section class="section section-primary mt-none" id="projects">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                {% if header %}
+                    {{ header }}
+                {% endif %}
+                <div class="owl-carousel owl-theme" data-plugin-options='{"items": 4, "margin": 20, "loop": false}'>
+                    {{ rows }}
+                </div>
+            </div>
+        </div>
+    </div>
+    </section>
+    {{ exposed }}
+    {{ attachment_before }}
+
+    {{ empty }}
+    {{ pager }}
+
+    {{ attachment_after }}
+    {{ more }}
+
+    {% if footer %}
+        <footer>
+            {{ footer }}
+        </footer>
+    {% endif %}
+
+    {{ feed_icons }}
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+

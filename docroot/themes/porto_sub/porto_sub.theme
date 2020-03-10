@@ -1,0 +1,53 @@
+<?php
+
+
+/**
+ * @file
+ * Functions to support theming in the porto sub theme.
+ */
+
+
+/**
+ * Implements hook_preprocess_HOOK() for node.html.twig.
+ */
+function porto_sub_preprocess_node(&$variables) {
+  global $base_url;
+  $lang = \Drupal::languageManager()->getCurrentLanguage()->getId();
+  $node = $variables['node'];
+  $type = $node->getType();
+  $nid = $node->nid->value;
+
+  if ($type === 'article') {
+    $variables['print_button'] = printfriendly_create_button('/node/' . $nid, FALSE);
+    $variables['ptf_link'] = $base_url . '/downlaod/' . $nid . '/ptf';
+    $variables['btf_link'] = $base_url . '/downlaod/' . $nid . '/btf';
+    $variables['ris_link'] = $base_url . '/downlaod/' . $nid . '/ris';
+    $variables['pre_pdf_link'] = $base_url . '/downlaod/' . $nid . '/pre_pdf';
+
+    if ($node->hasField('field_authors')) {
+      foreach ($node->get('field_authors')->referencedEntities() as $author) {
+        $authorName = '';
+        if (!empty($author->get('field_first_name')->value)) {
+          $authorName = $author->get('field_first_name')->value;
+        }
+  
+        if (!empty($author->get('field_last_name')->value)) {
+          $authorName .= ' ' . $author->get('field_last_name')->value;
+        }
+
+        $authors = isset($authors) ? $authors . ', ' . $authorName : $authors;
+      }
+    }
+
+    if ($lang == 'de') {
+      $variables['abstract'] = $node->get('field_abstract')->value;
+    } else {
+      $variables['abstract'] = $node->get('body')->value;
+    }
+
+    $variables['lang'] = journal_get_lang_name($node->get('field_language')->value);
+    $variables['authorus'] = $authors;
+
+  }
+
+}

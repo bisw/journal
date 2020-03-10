@@ -1,0 +1,85 @@
+{% set medias = node.field_media %}
+{% set images = node.field_image %}
+{% set display = content.field_blog_display['#items'].getValue()|first.value %}
+{% set createdDate = node.getCreatedTime|date('F d, Y') %}
+
+<article class="post post-medium">
+    <div class="row">
+
+        <div class="col-md-5">
+
+            {% if display == 'gallery' %}
+
+                {% if images|length %}
+                    <div class="post-image">
+                        <div class="owl-carousel owl-theme" data-plugin-options='{"items":1}'>
+                            {% for image  in images %}
+                                <div>
+                                    <div class="img-thumbnail">
+                                        <img class="img-responsive" src="{{ file_url(image.entity.fileuri) }}" alt="">
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endif %}
+
+            {% elseif display == 'video' %}
+
+                {% if medias|length %}
+                    <div class="post-video">
+                        {{ medias|first.value|raw }}
+                    </div>
+                {% endif %}
+
+            {% elseif display == 'audio' %}
+
+                {% if medias|length %}
+                    <div class="post-audio">
+                        {{ medias|first.value|raw }}
+                    </div>
+                {% endif %}
+
+            {% elseif display == 'quote' %}
+
+            {% else %}
+
+                {% if node.field_thumbnail.entity.fileuri %}
+                    <div class="post-image single">
+                        <img class="img-thumbnail" src="{{ file_url(node.field_thumbnail.entity.fileuri) }}" alt="">
+                    </div>
+                {% endif %}
+
+            {% endif %}
+
+        </div>
+        <div class="col-md-7">
+
+            <div class="post-content">
+
+                {% if display == 'quote' and medias|length %}
+                    {{ medias|first.value|raw }}
+                {% else %}
+                    <h2><a href="{{ url }}">{{ label }}</a></h2>
+                    <p>{{ content.body['#object'].body.summary }} [...]</p>
+                {% endif %}
+
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="post-meta">
+                <span><i class="fa fa-calendar"></i> {{ createdDate }} </span>
+                <span><i class="fa fa-user"></i> By {{ author_name }} </span>
+                {% if content.field_blog_tag|render %}
+                    <span><i class="fa fa-tag"></i> {{ content.field_blog_tag }} </span>
+                {% endif %}
+                <span><i class="fa fa-comments"></i> <a href="{{ url }}#comment-form">{{ comment_count }} Comments</a></span>
+                <a href="{{ url }}" class="btn btn-xs btn-primary pull-right">Read more...</a>
+            </div>
+        </div>
+    </div>
+
+</article>

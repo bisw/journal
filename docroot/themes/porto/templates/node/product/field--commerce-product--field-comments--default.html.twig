@@ -1,0 +1,37 @@
+{%
+  set classes = [
+    'field',
+    'field--name-' ~ field_name|clean_class,
+    'field--type-' ~ field_type|clean_class,
+    'field--label-' ~ label_display,
+    'comment-wrapper',
+  ]
+%}
+{%
+  set title_classes = [
+    'title',
+    label_display == 'visually_hidden' ? 'visually-hidden',
+  ]
+%}
+<section{{ attributes.addClass(classes) }}>
+    {% if comments and not label_hidden %}
+        {{ title_prefix }}
+        <h2{{ title_attributes.addClass(title_classes) }}>{{ label }}</h2>
+        {{ title_suffix }}
+    {% endif %}
+
+    <ul class="comments for-product">
+        {{ comments }}
+    </ul>
+    {% if comments %}
+        <hr class="tall">
+    {% endif %}
+
+    {% if comment_form %}
+        <h4 class="heading-primary">{{ 'Add a review'|t }}</h4>
+        <div class="post-leave-comment padding-top-0 margin-top-0">
+            {{ comment_form }}
+        </div>
+    {% endif %}
+
+</section>

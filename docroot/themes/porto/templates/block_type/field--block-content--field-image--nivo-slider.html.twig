@@ -1,0 +1,4 @@
+{% for key, item in items %}
+    {% set link = file_url(item.content['#item'].entity.fileuri) %}
+    <a href="#"><img src="{{ link }}" data-thumb="{{ link }}" alt="" /></a>
+{% endfor %}

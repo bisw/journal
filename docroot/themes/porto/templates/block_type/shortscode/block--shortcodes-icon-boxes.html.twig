@@ -1,0 +1,15 @@
+{%
+    set classes = [
+    'block',
+    'block-' ~ configuration.provider|clean_class,
+    'block-' ~ plugin_id|clean_class,
+]
+%}
+{% set style = content.field_layout_mode[0]['#markup'] %}
+<div{{ attributes.addClass(classes) }}>
+{{ title_prefix }}
+    <div class="featured-boxes featured-boxes-style-8">
+        {{ content.field_icbox_content }}
+    </div>
+{{ title_suffix }}
+</div>

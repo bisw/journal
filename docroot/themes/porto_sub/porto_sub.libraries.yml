@@ -1,0 +1,7 @@
+global-styling:
+  version: 8.x
+  css:
+    base:
+      css/custom_sub.css: {}
+
+

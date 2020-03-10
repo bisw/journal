@@ -1,0 +1,721 @@
+{% set layout_mode = content.field_layout_mode['#items'].getValue()|first.value %}
+
+{% if layout_mode != 'left_sidebar' and layout_mode != 'right_sidebar' and layout_mode != 'left_right_sidebar' and layout_mode != 'sticky_sidebar' %}
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="portfolio-title {% if layout_mode == 'extended' %} mb-xs {% endif %}">
+					<div class="row">
+						<div class="portfolio-nav-all col-md-1">
+							<a href="{{ base_url }}/portfolio-grid-full-width" data-tooltip data-original-title="{{ 'Back to list' | t }}">
+								<i class="fa fa-th"></i>
+							</a>
+						</div>
+						<div class="col-md-10 center">
+							<h2 class="mb-none">{{ label }}</h2>
+						</div>
+						<div class="portfolio-nav col-md-1">
+							{% if content.flippy_pager['#list']['prev'] and content.flippy_pager['#list']['prev'] != 'Null' %}
+								<a href="{{ base_url }}{{ '/node/' }}{{ content.flippy_pager['#list']['prev']['nid'] }}" class="portfolio-nav-prev" data-tooltip data-original-title="{{ 'Previous' | t }}"><i class="fa fa-chevron-left"></i></a>
+							{% endif %}
+							{% if content.flippy_pager['#list']['next'] and content.flippy_pager['#list']['next'] != 'Null' %}
+								<a href="{{ base_url }}{{ '/node/' }}{{ content.flippy_pager['#list']['next']['nid'] }}" class="portfolio-nav-next" data-tooltip data-original-title="{{ 'Next' | t }}"><i class="fa fa-chevron-right"></i></a>
+							{% endif %}
+						</div>
+					</div>
+				</div>
+				{% if layout_mode != 'medias' and layout_mode != 'fullwidth_slider' and layout_mode != 'carousel' and layout_mode != 'fullwidth_video' and layout_mode != 'extended' %}
+				<hr class="tall">
+				{% endif %}
+			</div>
+		</div>
+	</div>
+{% endif %}
+
+{% if layout_mode == 'small_slider' %}
+	<div class="container">
+		<div class="row">
+			<div class="col-md-4">
+				<div class="owl-carousel owl-theme" data-plugin-options='{"items": 1, "margin": 10, "animateOut": "fadeOut", "autoplay": true, "autoplayTimeout": 3000}'>
+					{% set images = node.field_image %}
+					{% for image  in images %}
+					<div>
+						<span class="img-thumbnail">
+							<img alt="" class="img-responsive" src="{{ file_url(image.entity.fileuri) }}">
+						</span>
+					</div>
+					{% endfor %}
+				</div>
+			</div>
+			<div class="col-md-8">
+				<div class="portfolio-info">
+					<div class="row">
+						<div class="col-md-12 center">
+							<ul>
+								<li>
+									<i class="fa fa-calendar"></i>
+									{% set createdDate = node.getCreatedTime|date('d F Y') %}
+									{{ createdDate }}
+								</li>
+								<li>
+									<i class="fa fa-tags"></i>
+									{{ content.field_tags }}
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<h5 class="mt-sm">{{ 'Project Description' | t }}</h5>
+				<div class="mt-xlg">{{ content.body }}</div>
+				<a href="{{ content.field_portfolio_link | render | striptags}}" class="btn btn-primary btn-icon"><i class="fa fa-external-link"></i>{{ 'Live Preview' | t }}</a> <span class="arrow hlb appear-animation" data-appear-animation="rotateInUpLeft" data-appear-animation-delay="800"></span>
+				<ul class="portfolio-details">
+					<li>
+						<h5 class="mt-sm mb-xs">{{ 'Skills' | t }}</h5>
+						{{ content.field_portfolio_skills }}
+					</li>
+					<li>
+						<h5 class="mt-sm mb-xs">{{ 'Client' | t }}</h5>
+						<p>{{ content.field_portfolio_client | render | striptags}}</p>
+					</li>
+				</ul>
+			</div>
+		</div>
+		{{ related_portfolio }}
+	</div>
+{% elseif layout_mode == 'wide_slider' %}
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">			
+				<div class="owl-carousel owl-theme show-nav-hover mt-none" data-plugin-options='{"items": 1, "margin": 10, "loop": true, "nav": true, "animateOut": "fadeOut"}'>
+					{% set images = node.field_image %}
+					{% for image  in images %}
+					<div>
+						<span class="img-thumbnail">
+							<img src="{{ file_url(image.entity.fileuri) }}" class="img-responsive" alt="">
+						</span>
+					</div>
+					{% endfor %}				
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="portfolio-info pull-left">
+					<div class="row">
+						<div class="col-md-12 center">
+							<ul>
+								<li>
+									<i class="fa fa-calendar"></i>
+									{% set createdDate = node.getCreatedTime|date('d F Y') %}
+									{{ createdDate }}
+								</li>
+								<li>
+									<i class="fa fa-tags"></i>
+									{{ content.field_tags }}
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-7">
+				<h5 class="mt-lg mb-sm">{{ 'Project Description' | t }}</h5>
+				<div class="mt-none mb-xlg">{{ content.body | render | striptags }}</div>
+				<a href="{{ content.field_portfolio_link | render | striptags}}" class="btn btn-primary btn-icon"><i class="fa fa-external-link"></i>{{ 'Live Preview' | t }}</a> <span class="arrow hlb appear-animation" data-appear-animation="rotateInUpLeft" data-appear-animation-delay="800"></span>
+				<ul class="portfolio-details">
+					<li>
+						<h5 class="mt-sm mb-xs">{{ 'Skills' | t }}</h5>
+						{{ content.field_portfolio_skills }}
+					</li>
+				</ul>
+			</div>
+			<div class="col-md-5">
+				<ul class="portfolio-details mt-none mb-xl">
+					<li>
+						<h5 class="mt-lg mb-sm">{{ 'Client' | t }}</h5>
+						<p>{{ content.field_portfolio_client | render | striptags}} - <a href="{{ content.field_portfolio_client_link | render | striptags}}" target="_blank"><i class="fa fa-external-link"></i> {{ content.field_portfolio_client_link | render | striptags}}</a></p>
+					</li>
+				</ul>
+				{{ content.field_portfolio_testimonial }}
+			</div>
+		</div>
+		{{ related_portfolio }}
+	</div>
+{% elseif layout_mode == 'fullwidth_slider' %}
+	<hr class="mt-xl mb-none solid">
+	<div class="owl-carousel owl-theme full-width owl-loaded owl-drag owl-carousel-init m-none mb-lg" data-plugin-options='{"items": 1, "loop": true, "nav": true, "dots": false, "animateOut": "fadeOut"}'>
+		{% set images = node.field_image %}
+		{% for image  in images %}
+		<div>
+			<img src="{{ file_url(image.entity.fileuri) }}" class="img-responsive" alt="">
+		</div>
+		{% endfor %}
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="portfolio-info mt-xl pull-left">
+					<div class="row">
+						<div class="col-md-12 center">
+							<ul>
+								<li>
+									<i class="fa fa-calendar"></i> 
+									{% set createdDate = node.getCreatedTime|date('d F Y') %}
+									{{ createdDate }}
+								</li>
+								<li>
+									<i class="fa fa-tags"></i>
+									{{ content.field_tags }}
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-7">
+				<h5 class="mt-lg mb-sm">{{ 'Project Description' | t }}</h5>
+				<div class="mt-none mb-xlg">{{ content.body | render | striptags }}</div>
+				<a href="{{ content.field_portfolio_link | render | striptags}}" class="btn btn-primary btn-icon"><i class="fa fa-external-link"></i>{{ 'Live Preview' | t }}</a> <span class="arrow hlb appear-animation" data-appear-animation="rotateInUpLeft" data-appear-animation-delay="800"></span>
+				<ul class="portfolio-details">
+					<li>
+						<h5 class="mt-sm mb-xs">{{ 'Skills' | t }}</h5>
+						{{ content.field_portfolio_skills }}
+					</li>
+				</ul>
+
+			</div>
+			<div class="col-md-5">
+				<ul class="portfolio-details mt-none mb-xl">
+					<li>
+						<h5 class="mt-lg mb-sm">{{ 'Client' | t }}</h5>
+						<p>{{ content.field_portfolio_client | render | striptags}} - <a href="{{ content.field_portfolio_client_link | render | striptags}}" target="_blank"><i class="fa fa-external-link"></i> {{ content.field_portfolio_client_link | render | striptags}}</a></p>
+					</li>
+				</ul>
+				{{ content.field_portfolio_testimonial }}
+			</div>
+		</div>
+		{{ related_portfolio }}
+	</div>
+{% elseif layout_mode == 'gallery_slider' %}
+	<div class="container">
+		<div class="row">	
+			<ul class="portfolio-list lightbox m-none" data-plugin-options='{"delegate": "a.lightbox-portfolio", "type": "image", "gallery": {"enabled": true}}'>
+				{% set images = node.field_image %}
+				{% for image  in images %}
+				<li class="col-md-3 col-sm-6 col-xs-12">
+					<div class="portfolio-item">
+						<span class="thumb-info thumb-info-lighten thumb-info-centered-icons">
+							<span class="thumb-info-wrapper">
+								<img src="{{ file_url(image.entity.fileuri) }}" class="img-responsive" alt="">
+								<span class="thumb-info-action">
+									<a href="{{ file_url(image.entity.fileuri) }}" class="lightbox-portfolio">
+										<span class="thumb-info-action-icon thumb-info-action-icon-light"><i class="fa fa-search-plus"></i></span>
+									</a>
+								</span>
+							</span>
+						</span>
+					</div>
+				</li>
+				{% endfor %}
+			</ul>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="portfolio-info mt-xl pull-left">
+					<div class="row">
+						<div class="col-md-12 center">
+							<ul>
+								<li>
+									<i class="fa fa-calendar"></i>
+									{% set createdDate = node.getCreatedTime|date('d F Y') %}
+									{{ createdDate }}
+								</li>
+								<li>
+									<i class="fa fa-tags"></i> 
+									{{ content.field_tags }}
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-7">
+				<h5 class="mt-lg mb-sm">{{ 'Project Description' | t }}</h5>
+				<div class="mt-none mb-xlg">{{ content.body | render | striptags }}</div>
+				<a href="{{ content.field_portfolio_link | render | striptags}}" class="btn btn-primary btn-icon"><i class="fa fa-external-link"></i>{{ 'Live Preview' | t }}</a> <span class="arrow hlb appear-animation" data-appear-animation="rotateInUpLeft" data-appear-animation-delay="800"></span>
+				<ul class="portfolio-details">
+					<li>
+						<h5 class="mt-sm mb-xs">{{ 'Skills' | t }}</h5>
+						{{ content.field_portfolio_skills }}
+					</li>
+				</ul>
+			</div>
+			<div class="col-md-5">
+				<ul class="portfolio-details mt-none mb-xl">
+					<li>
+						<h5 class="mt-lg mb-sm">{{ 'Client' | t }}</h5>
+						<p>{{ content.field_portfolio_client | render | striptags}} - <a href="{{ content.field_portfolio_client_link | render | striptags}}" target="_blank"><i class="fa fa-external-link"></i> {{ content.field_portfolio_client_link | render | striptags}}</a></p>
+					</li>
+				</ul>
+				{{ content.field_portfolio_testimonial }}
+			</div>
+		</div>
+	</div>
+{% elseif layout_mode == 'carousel' %}
+	<hr class="mt-xl mb-none solid">
+	<div id="revolutionSliderCarouselContainer" class="rev_slider_wrapper fullwidthbanner-container mb-none" data-alias="" style="background: #f3f3f2;">
+		<div id="revolutionSliderCarousel" class="rev_slider fullwidthabanner" data-version="">
+			<ul>
+				{% set i = 1 %}
+				{% set images = node.field_image %}
+				{% for image  in images %}
+					<li data-index="rs-{{ i }}" data-transition="fade" data-slotamount="7" data-easein="default" data-easeout="default" data-masterspeed="300" data-rotate="0" data-saveperformance="off" data-title="" data-description="">
+						<img src="{{ file_url(image.entity.fileuri) }}" alt="" data-bgposition="center center" data-bgfit="contain" data-bgrepeat="no-repeat" class="rev-slidebg" data-no-retina>
+					</li>
+					{% set i = i + 1 %}
+				{% endfor %}
+			</ul>
+		</div>
+	</div>
+	<hr class="mt-none mb-xl solid">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="portfolio-info mt-xl pull-left">
+					<div class="row">
+						<div class="col-md-12 center">
+							<ul>
+								<li>
+									<i class="fa fa-calendar"></i>
+									{% set createdDate = node.getCreatedTime|date('d F Y') %}
+									{{ createdDate }}
+								</li>
+								<li>
+									<i class="fa fa-tags"></i> 
+									{{ content.field_tags }}
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-9">
+				<h5 class="mt-lg mb-sm">{{ 'Project Description' | t }}</h5>
+				<div class="mt-none mb-xlg">{{ content.body | render | striptags }}</div>
+				<a href="{{ content.field_portfolio_link | render | striptags}}" class="btn btn-primary btn-icon"><i class="fa fa-external-link"></i>{{ 'Live Preview' | t }}</a> <span class="arrow hlb appear-animation" data-appear-animation="rotateInUpLeft" data-appear-animation-delay="800"></span>
+				<ul class="portfolio-details">
+					<li>
+						<h5 class="mt-sm mb-xs">{{ 'Skills' | t }}</h5>
+						{{ content.field_portfolio_skills }}
+					</li>
+				</ul>
+				<ul class="portfolio-details mt-none mb-xl">
+					<li>
+						<h5 class="mt-lg mb-sm">{{ 'Client' | t }}</h5>
+						<p>{{ content.field_portfolio_client | render | striptags}} - <a href="{{ content.field_portfolio_client_link | render | striptags}}" target="_blank"><i class="fa fa-external-link"></i> {{ content.field_portfolio_client_link | render | striptags}}</a></p>
+					</li>
+				</ul>
+			</div>
+			<div class="col-md-3">
+				{{ related_portfolio_carousel }}
+			</div>
+		</div>
+	</div>
+{% elseif layout_mode == 'medias' %}
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div id="revolutionSliderMediasContainer" class="rev_slider_wrapper mb-none mt-xl">
+					<div id="revolutionSliderMedias" class="rev_slider" data-version="">
+						<ul>
+							{% set i = 1 %}
+							{% set medias = node.field_media %}
+							{% for media  in medias %}
+								<li data-index="rs-{{ i }}" data-transition="fade" data-slotamount="default" data-easein="default" data-easeout="default" data-masterspeed="default" data-thumb=""  data-rotate="0" data-saveperformance="off" data-title="" data-param1="{{ 'Youtube Video' | t }}" data-description="">
+									<img src="{{ theme_root }}/img/blank.gif" alt="" data-lazyload="" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" class="rev-slidebg" data-no-retina>
+									<div class="tp-caption tp-resizeme fullscreenvideo tp-videolayer" 
+										id="slide-{{ i }}-layer-3" 
+										data-x="0" 
+										data-y="0" 
+										data-width="['auto']"
+										data-height="['auto']"
+										data-transform_idle="o:1;"
+										data-transform_in="s:1000;e:Power1.easeInOut;" 
+										data-transform_out="s:1000;s:1000;" 
+										data-start="1000" 
+										data-responsive_offset="on" 
+										data-ytid="{{ media.value | raw }}"
+										data-videoattributes="version=3&amp;enablejsapi=1&amp;html5=1&amp;volume=100&hd=1&wmode=opaque&showinfo=0&ref=0;;origin=http://server.local;"
+										data-videorate="1"
+										data-videowidth="100%"
+										data-videoheight="100%"
+										data-videocontrols="controls"
+										data-videoloop="none"
+										data-forceCover="1"
+										data-aspectratio="16:9"
+										data-autoplay="on" 
+										data-nextslideatend="true" 
+										data-volume="100"
+										data-forcerewind="on"
+										style="z-index: 5;"> 
+									</div>
+								</li>
+								{% set i = i + 1 %}
+							{% endfor %}
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="portfolio-info mt-xlg pull-left">
+					<div class="row">
+						<div class="col-md-12 center">
+							<ul>
+								<li>
+									<i class="fa fa-calendar"></i>
+									{% set createdDate = node.getCreatedTime|date('d F Y') %}
+									{{ createdDate }}
+								</li>
+								<li>
+									<i class="fa fa-tags"></i>
+									{{ content.field_tags }}
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-9">
+				<h5 class="mt-lg mb-sm">{{ 'Project Description' | t }}</h5>
+				<div class="mt-none mb-xlg">{{ content.body | render | striptags }}</div>
+				<a href="{{ content.field_portfolio_link | render | striptags}}" class="btn btn-primary btn-icon"><i class="fa fa-external-link"></i>{{ 'Live Preview' | t }}</a> <span class="arrow hlb appear-animation" data-appear-animation="rotateInUpLeft" data-appear-animation-delay="800"></span>
+				<ul class="portfolio-details">
+					<li>
+						<h5 class="mt-sm mb-xs">{{ 'Skills' | t }}</h5>
+						{{ content.field_portfolio_skills }}
+					</li>
+				</ul>
+				<ul class="portfolio-details mt-none mb-xl">
+					<li>
+						<h5 class="mt-lg mb-sm">{{ 'Client' | t }}</h5>
+						<p>{{ content.field_portfolio_client | render | striptags}} - <a href="{{ content.field_portfolio_client_link | render | striptags}}" target="_blank"><i class="fa fa-external-link"></i> {{ content.field_portfolio_client_link | render | striptags}}</a></p>
+					</li>
+				</ul>
+			</div>
+			<div class="col-md-3">
+				{{ related_portfolio_carousel }}
+			</div>
+		</div>
+	</div>
+{% elseif layout_mode == 'fullwidth_video' %}
+	<hr class="mt-xl mb-none solid">
+	<div class="slider-container light rev_slider_wrapper" style="height: 550px;">
+		<div id="revolutionSlider" class="slider rev_slider" data-plugin-revolution-slider data-plugin-options='{"delay": 9000, "gridwidth": 800, "gridheight": 550}'>
+			<ul>
+				{% set medias = node.field_media %}
+				<li data-transition="fade">
+					<img src="{{ theme_root }}/img/blank.gif" alt="" data-lazyload="" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" class="rev-slidebg" data-no-retina>
+					{% if medias|length %}
+					<div class="tp-caption tp-resizeme fullscreenvideo tp-videolayer" 
+						id="slide-{{ i }}-layer-3" 
+						data-x="0" 
+						data-y="0" 
+						data-width="['auto']"
+						data-height="['auto']"
+						data-transform_idle="o:1;"
+						data-transform_in="s:1000;e:Power1.easeInOut;" 
+						data-transform_out="s:1000;s:1000;" 
+						data-start="1000" 
+						data-responsive_offset="on" 
+						data-ytid="{{ medias|first.value|raw }}"
+						data-videoattributes="version=3&amp;enablejsapi=1&amp;html5=1&amp;volume=100&hd=1&wmode=opaque&showinfo=0&ref=0;;origin=http://server.local;"
+						data-videorate="1"
+						data-videowidth="100%"
+						data-videoheight="100%"
+						data-videocontrols="controls"
+						data-videoloop="none"
+						data-forceCover="1"
+						data-aspectratio="16:9"
+						data-autoplay="on" 
+						data-nextslideatend="true" 
+						data-volume="100"
+						data-forcerewind="on"
+						style="z-index: 5;"> 
+					</div>
+					{% endif %}
+				</li>
+			</ul>
+		</div>
+	</div>
+	<hr class="mt-none mb-xl solid">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="portfolio-info mt-xl pull-left">
+					<div class="row">
+						<div class="col-md-12 center">
+							<ul>
+								<li>
+									<i class="fa fa-calendar"></i>
+									{% set createdDate = node.getCreatedTime|date('d F Y') %}
+									{{ createdDate }}
+								</li>
+								<li>
+									<i class="fa fa-tags"></i>
+									{{ content.field_tags }}
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-9">
+				<h5 class="mt-lg mb-sm">{{ 'Project Description' | t }}</h5>
+				<div class="mt-none mb-xlg">{{ content.body | render | striptags }}</div>
+				<a href="{{ content.field_portfolio_link | render | striptags}}" class="btn btn-primary btn-icon"><i class="fa fa-external-link"></i>{{ 'Live Preview' | t }}</a> <span class="arrow hlb appear-animation" data-appear-animation="rotateInUpLeft" data-appear-animation-delay="800"></span>
+				<ul class="portfolio-details">
+					<li>
+						<h5 class="mt-sm mb-xs">{{ 'Skills' | t }}</h5>
+						{{ content.field_portfolio_skills }}
+					</li>
+				</ul>
+				<ul class="portfolio-details mt-none mb-xl">
+					<li>
+						<h5 class="mt-lg mb-sm">{{ 'Client' | t }}</h5>
+						<p>{{ content.field_portfolio_client | render | striptags}} - <a href="{{ content.field_portfolio_client_link | render | striptags}}" target="_blank"><i class="fa fa-external-link"></i> {{ content.field_portfolio_client_link | render | striptags}}</a></p>
+					</li>
+				</ul>
+				{{ content.field_portfolio_testimonial }}
+			</div>
+			<div class="col-md-3">
+				<h5 class="mt-lg mb-md">Project Gallery</h5>
+				<ul class="portfolio-list lightbox m-none" data-plugin-options='{"delegate": "a.lightbox-portfolio", "type": "image", "gallery": {"enabled": true}}'>
+					{% set images = node.field_image %}
+					{% for image  in images %}
+					<li class="col-md-12 p-none m-none">
+						<div class="portfolio-item">
+							<span class="thumb-info thumb-info-lighten thumb-info-centered-icons">
+								<span class="thumb-info-wrapper">
+									<img src="{{ file_url(image.entity.fileuri) }}" class="img-responsive" alt="">
+									<span class="thumb-info-action">
+										<a href="{{ file_url(image.entity.fileuri) }}" class="lightbox-portfolio">
+											<span class="thumb-info-action-icon thumb-info-action-icon-light"><i class="fa fa-search-plus"></i></span>
+										</a>
+									</span>
+								</span>
+							</span>
+						</div>
+					</li>
+					{% endfor %}
+				</ul>
+			</div>
+		</div>
+	</div>
+{% elseif layout_mode == 'masonry_images' %}
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8">
+				<div class="lightbox" data-plugin-options='{"delegate": "a.lightbox-portfolio", "type": "image", "gallery": {"enabled": true}}'>
+					<div class="masonry-loader masonry-loader-showing">
+						<div class="masonry" data-plugin-masonry data-plugin-options='{"itemSelector": ".masonry-item"}'>
+							{% set images = node.field_image %}
+							{% for image  in images %}
+							<div class="masonry-item">
+								<span class="thumb-info thumb-info-centered-icons thumb-info-no-borders">
+									<span class="thumb-info-wrapper">
+										<img src="{{ file_url(image.entity.fileuri) }}" class="img-responsive" alt="">
+										<span class="thumb-info-action">
+											<a href="{{ file_url(image.entity.fileuri) }}" class="lightbox-portfolio">
+												<span class="thumb-info-action-icon thumb-info-action-icon-light"><i class="fa fa-search-plus"></i></span>
+											</a>
+										</span>
+									</span>
+								</span>
+							</div>
+							{% endfor %}
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="portfolio-info pull-none">
+					<ul>
+						<li>
+							<i class="fa fa-calendar"></i> 
+							{% set createdDate = node.getCreatedTime|date('d F Y') %}
+							{{ createdDate }}
+						</li>
+						<li>
+							<i class="fa fa-tags"></i>
+							{{ content.field_tags }}
+						</li>
+					</ul>
+				</div>
+				<h5 class="mt-lg mb-sm">{{ 'Project Description' | t }}</h5>
+				<div class="mt-none mb-xlg">{{ content.body | render | striptags }}</div>
+				<a href="{{ content.field_portfolio_link | render | striptags}}" class="btn btn-primary btn-icon"><i class="fa fa-external-link"></i>{{ 'Live Preview' | t }}</a> <span class="arrow hlb appear-animation" data-appear-animation="rotateInUpLeft" data-appear-animation-delay="800"></span>
+				<ul class="portfolio-details">
+					<li>
+						<h5 class="mt-sm mb-xs">{{ 'Skills' | t }}</h5>
+						{{ content.field_portfolio_skills }}
+					</li>
+				</ul>
+				<ul class="portfolio-details mt-none mb-xl">
+					<li>
+						<h5 class="mt-lg mb-sm">{{ 'Client' | t }}</h5>
+						<p>{{ content.field_portfolio_client | render | striptags}} - <a href="{{ content.field_portfolio_client_link | render | striptags}}" target="_blank"><i class="fa fa-external-link"></i> {{ content.field_portfolio_client_link | render | striptags}}</a></p>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+{% elseif layout_mode == 'left_sidebar' or layout_mode == 'right_sidebar' or layout_mode == 'left_right_sidebar' %}
+	<div class="container">
+		<div class="row">
+		{% if layout_mode == 'left_sidebar' or  layout_mode == 'left_right_sidebar' %}
+			<div class="col-md-3">
+				<aside class="sidebar left_portfolio_sidebar">
+					{{ left_sidebar }}
+				</aside>
+			</div>
+		{% endif %}
+		{% if layout_mode == 'left_right_sidebar' %}
+			<div class="col-md-6">
+		{% else %}
+			<div class="col-md-9">
+		{% endif %}
+				<div class="row">
+					<div class="lightbox" data-plugin-options='{"delegate": "a.lightbox-portfolio", "type": "image", "gallery": {"enabled": true}}'>
+						<ul class="portfolio-list">
+							{% set images = node.field_image %}
+							{% for image  in images %}
+								<li class="col-md-12">
+									<div class="portfolio-item">
+										<span class="thumb-info thumb-info-centered-icons thumb-info-no-borders">
+											<span class="thumb-info-wrapper">
+												<img src="{{ file_url(image.entity.fileuri) }}" class="img-responsive" alt="">
+												<a href="{{ file_url(image.entity.fileuri) }}" class="lightbox-portfolio">
+													<span class="thumb-info-action">
+														<span class="thumb-info-action-icon thumb-info-action-icon-light"><i class="fa fa-search-plus"></i></span>
+													</span>
+												</a>
+											</span>
+										</span>
+									</div>
+								</li>
+							{% endfor %}
+						</ul>
+					</div>	
+				</div>
+			</div>
+		{% if layout_mode == 'right_sidebar' or  layout_mode == 'left_right_sidebar' %}
+			{% if layout_mode == 'right_sidebar' %}
+				{% set class_sidebar = 'right_portfolio_sidebar' %}
+			{% else %}
+				{% set class_sidebar = '' %}
+			{% endif %}
+			<div class="col-md-3">
+				<aside class="sidebar {{ class_sidebar }}">
+					{{ right_sidebar }}
+				</aside>
+			</div>
+		{% endif %}
+		</div>
+	</div>
+{% elseif layout_mode == 'sticky_sidebar' %}
+	<div class="container">
+		<div class="row">
+			<div class="col-md-7">
+				<div class="row">
+					<div class="lightbox" data-plugin-options='{"delegate": "a.lightbox-portfolio", "type": "image", "gallery": {"enabled": true}}'>
+						<ul class="portfolio-list">
+							{% set images = node.field_image %}
+							{% for image  in images %}
+							<li class="col-md-12">
+								<div class="portfolio-item">
+									<span class="thumb-info thumb-info-centered-icons thumb-info-no-borders">
+										<span class="thumb-info-wrapper">
+											<img src="{{ file_url(image.entity.fileuri) }}" class="img-responsive" alt="">
+											<a href="{{ file_url(image.entity.fileuri) }}" class="lightbox-portfolio">
+												<span class="thumb-info-action">
+													<span class="thumb-info-action-icon thumb-info-action-icon-light"><i class="fa fa-search-plus"></i></span>
+												</span>
+											</a>
+										</span>
+									</span>
+								</div>
+							</li>
+							{% endfor %}
+						</ul>
+					</div>	
+				</div>
+			</div>
+			<div class="col-md-5">
+				<aside class="sidebar" id="sidebar" data-plugin-sticky data-plugin-options='{"minWidth": 991, "containerSelector": ".container", "padding": {"top": 110}}'>
+					<div class="portfolio-info pull-none">
+						<ul>
+							<li>
+								<i class="fa fa-calendar"></i> 
+								{% set createdDate = node.getCreatedTime|date('d F Y') %}
+								{{ createdDate }}
+							</li>
+							<li>
+								<i class="fa fa-tags"></i> 
+								{{ content.field_tags }}
+							</li>
+						</ul>
+					</div>
+					<h5 class="mt-xl">{{ 'Project Description' | t }}</h5>
+					<div class="mt-xlg">{{ content.body }}</div>
+					<a href="{{ content.field_portfolio_link | render | striptags}}" class="btn btn-primary btn-icon"><i class="fa fa-external-link"></i>{{ 'Live Preview' | t }}</a> <span class="arrow hlb appear-animation" data-appear-animation="rotateInUpLeft" data-appear-animation-delay="800"></span>
+					<ul class="portfolio-details">
+						<li>
+							<h5 class="mt-sm mb-xs">{{ 'Skills' | t }}</h5>
+							{{ content.field_portfolio_skills }}
+						</li>
+					</ul>
+				</aside>
+			</div>
+		</div>
+	</div>
+{% elseif layout_mode == 'extended' %}
+	{{ content.field_portfolio_extended }}
+	<div class="container">
+		<div class="row">
+			<div class="col-md-7">
+				<h5 class="mt-lg mb-sm">{{ 'More Information' | t }}</h5>
+				<div class="mt-none mb-xlg">{{ content.body | render | striptags }}</div>
+				<a href="#" class="btn btn-primary btn-icon"><i class="fa fa-external-link"></i>{{ 'Live Preview' | t }}</a> <span class="arrow hlb appear-animation" data-appear-animation="rotateInUpLeft" data-appear-animation-delay="800"></span>
+				<ul class="portfolio-details">
+					<li>
+						<h5 class="mt-sm mb-xs">{{ 'Skills' | t }}</h5>
+						{{ content.field_portfolio_skills }}
+					</li>
+				</ul>
+			</div>
+			<div class="col-md-5">
+				<ul class="portfolio-details mt-none mb-xl">
+					<li>
+						<h5 class="mt-lg mb-sm">{{ 'Client' | t }}</h5>
+						<p>{{ content.field_portfolio_client | render | striptags}} - <a href="{{ content.field_portfolio_client_link | render | striptags}}" target="_blank"><i class="fa fa-external-link"></i> {{ content.field_portfolio_client_link | render | striptags}}</a></p>
+					</li>
+				</ul>
+				{{ content.field_portfolio_testimonial }}
+			</div>
+		</div>
+	</div>
+{% endif %}

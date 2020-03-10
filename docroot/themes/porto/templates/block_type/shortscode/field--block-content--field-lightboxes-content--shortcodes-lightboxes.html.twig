@@ -1,0 +1,7 @@
+
+{% for key, item in items %}
+    {% set thumbnail = file_url(item.content['#field_collection_item'].field_lightbox_image.entity.fileuri) %}
+    <a class="img-thumbnail mb-xs mr-xs" href="{{ thumbnail }}" title="">
+        <img class="img-responsive" src="{{ thumbnail }}" width="110" height="110" alt="Project">
+    </a>
+{% endfor %}

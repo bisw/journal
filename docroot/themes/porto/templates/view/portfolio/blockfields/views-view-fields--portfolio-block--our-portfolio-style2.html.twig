@@ -1,0 +1,6 @@
+{% set thumbnail = row._entity.field_thumbnail %}
+<div>
+    <a href="{{ fields.path.content }}">
+        <img src="{{ file_url(thumbnail.entity.fileuri) }}" class="img-responsive" alt="">
+    </a>
+</div>

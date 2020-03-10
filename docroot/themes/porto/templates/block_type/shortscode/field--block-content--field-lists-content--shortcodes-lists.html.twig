@@ -1,0 +1,5 @@
+{% for key, item in items %}
+    <ul class="list list-icons list-primary">
+        <li><i class="fa {{ item.content['#field_collection_item'].field_lists_icon.value }}"></i> {{ item.content['#field_collection_item'].field_lists_description.value | striptags }}</li>
+    </ul>
+{% endfor %}

@@ -1,0 +1,35 @@
+{%
+  set classes = [
+    'field',
+    'field--name-' ~ field_name|clean_class,
+    'field--type-' ~ field_type|clean_class,
+    'field--label-' ~ label_display,
+    'comment-wrapper',
+  ]
+%}
+{%
+  set title_classes = [
+    'title',
+    label_display == 'visually_hidden' ? 'visually-hidden',
+  ]
+%}
+{#<section{{ attributes.addClass(classes) }}>#}
+{% if comments and not label_hidden %}
+    {{ title_prefix }}
+    <h2{{ title_attributes.addClass(title_classes) }}>{{ label }}</h2>
+    {{ title_suffix }}
+{% endif %}
+
+<ul class="comments">
+    {{ comments }}
+</ul>
+
+{% if comment_form %}
+    <div class="post-block post-leave-comment">
+        <h3 class="heading-primary">{{ 'Leave a comment'|t }}</h3>
+        <!--h2 class="title comment-form__title"></h2-->
+        {{ comment_form }}
+    </div>
+{% endif %}
+
+{#</section>#}

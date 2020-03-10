@@ -1,0 +1,6 @@
+{% set images = row._entity.field_image %}
+{% for image  in images %}
+<div class="content-grid-item col-md-6 center">
+    <img class="img-responsive" src="{{ file_url(image.entity.fileuri) }}" alt="">
+</div>
+{% endfor %}

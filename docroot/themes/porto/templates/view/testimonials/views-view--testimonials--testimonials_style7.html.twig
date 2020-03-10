@@ -1,0 +1,50 @@
+{%
+set classes = [
+dom_id ? 'js-view-dom-id-' ~ dom_id,
+]
+%}
+
+<div{{ attributes.addClass(classes) }}>
+    {{ title_prefix }}
+    {{ title }}
+    {#  {{ title_suffix }}#}
+
+
+    <section class="section section-no-background section-no-border mt-none mb-none" id="testimonials">
+        <div class="container">
+            {% if header %}
+            <div class="row">
+                <div class="col-md-12 center">
+                        {{ header }}
+                </div>
+            </div>
+            {% endif %}
+            {{ rows }}
+        </div>
+    </section>
+    {{ exposed }}
+    {{ attachment_before }}
+
+    {{ empty }}
+    {{ pager }}
+
+    {{ attachment_after }}
+    {{ more }}
+
+    {% if footer %}
+        <footer>
+            {{ footer }}
+        </footer>
+    {% endif %}
+
+    {{ feed_icons }}
+</div>
+
+
+
+
+
+
+
+
+

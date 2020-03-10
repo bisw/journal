@@ -1,0 +1,18 @@
+<div>
+    <div class="col-md-12">
+        <div class="testimonial testimonial-style-6 testimonial-with-quotes mb-none">
+            {% if fields.body %}
+                <blockquote>
+                    {{ fields.body.content }}
+                </blockquote>
+            {% endif %}
+            <div class="testimonial-author">
+                <p><strong>{{ fields.title.content }}</strong>
+                    {% if fields.field_testimonial_info %}
+                        <span>{{ fields.field_testimonial_info.content }}</span>
+                    {% endif %}
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
