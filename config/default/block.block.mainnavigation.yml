@@ -1,0 +1,25 @@
+uuid: 96b0b990-b81c-42c7-b54f-e3c15af9de4b
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.main
+  module:
+    - system
+  theme:
+    - porto_sub
+id: mainnavigation
+theme: porto_sub
+region: footer_41
+weight: 0
+provider: null
+plugin: 'system_menu_block:main'
+settings:
+  id: 'system_menu_block:main'
+  label: 'Journal Sites'
+  provider: system
+  label_display: visible
+  level: 1
+  depth: 0
+  expand_all_items: false
+visibility: {  }

@@ -1,0 +1,8 @@
+uuid: a76d81cd-d2f0-4289-935a-f3ebd35b7f1f
+langcode: en
+status: true
+dependencies: {  }
+id: accordion-menu
+label: 'Accordion Menu'
+description: ''
+locked: false

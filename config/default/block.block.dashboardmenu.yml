@@ -1,0 +1,20 @@
+uuid: 53d93cff-58e7-48bb-ab3d-7fb5a0c4bd12
+langcode: en
+status: true
+dependencies:
+  module:
+    - journal
+  theme:
+    - porto_sub
+id: dashboardmenu
+theme: porto_sub
+region: nav_top
+weight: 0
+provider: null
+plugin: journal_dashboard_menu_block
+settings:
+  id: journal_dashboard_menu_block
+  label: 'Dashboard Menu'
+  provider: journal
+  label_display: '0'
+visibility: {  }

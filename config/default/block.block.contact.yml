@@ -1,0 +1,25 @@
+uuid: bbccfb46-60ea-4d88-8e90-2d82589e6b2e
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:ea6df82c-8db8-4061-acfd-b4b6869ef88d'
+  module:
+    - block_content
+  theme:
+    - porto_sub
+id: contact
+theme: porto_sub
+region: footer_31
+weight: 0
+provider: null
+plugin: 'block_content:ea6df82c-8db8-4061-acfd-b4b6869ef88d'
+settings:
+  id: 'block_content:ea6df82c-8db8-4061-acfd-b4b6869ef88d'
+  label: Contact
+  provider: block_content
+  label_display: visible
+  status: true
+  info: ''
+  view_mode: full
+visibility: {  }

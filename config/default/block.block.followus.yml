@@ -1,0 +1,25 @@
+uuid: ac191cd1-febf-4ba0-9a55-402ca3b3a14f
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:7af29069-4c12-4293-b384-4fd91109b742'
+  module:
+    - block_content
+  theme:
+    - porto_sub
+id: followus
+theme: porto_sub
+region: footer_11
+weight: 0
+provider: null
+plugin: 'block_content:7af29069-4c12-4293-b384-4fd91109b742'
+settings:
+  id: 'block_content:7af29069-4c12-4293-b384-4fd91109b742'
+  label: 'Follow Us'
+  provider: block_content
+  label_display: visible
+  status: true
+  info: ''
+  view_mode: full
+visibility: {  }

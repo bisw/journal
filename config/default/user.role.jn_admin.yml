@@ -6,4 +6,17 @@ id: jn_admin
 label: 'JN Admin'
 weight: 3
 is_admin: null
-permissions: {  }
+permissions:
+  - 'create article content'
+  - 'create content translations'
+  - 'delete any article content'
+  - 'delete article revisions'
+  - 'delete own article content'
+  - 'edit any article content'
+  - 'edit own article content'
+  - 'revert article revisions'
+  - 'update content translations'
+  - 'use text format full_html'
+  - 'use text format restricted_html'
+  - 'view article revisions'
+  - 'view own unpublished content'

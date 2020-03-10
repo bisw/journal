@@ -1,0 +1,22 @@
+uuid: f1a0c4a9-6742-4851-a705-0643e4236082
+langcode: en
+status: true
+dependencies:
+  theme:
+    - porto_sub
+_core:
+  default_config_hash: X9I1OB0W3WlWtrK-CNcg6hNWwa8wficanpH8pYnDZDE
+id: porto_sub_local_tasks
+theme: porto_sub
+region: content
+weight: -40
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: Tabs
+  provider: core
+  label_display: '0'
+  primary: true
+  secondary: true
+visibility: {  }

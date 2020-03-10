@@ -1,0 +1,24 @@
+uuid: 2a31e265-f89b-49b3-a635-8ee08cb23ba2
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_class
+    - language
+  theme:
+    - porto_sub
+third_party_settings:
+  block_class:
+    classes: language-switcher-locale-url
+id: languageswitcher
+theme: porto_sub
+region: primary_menu
+weight: -6
+provider: null
+plugin: 'language_block:language_interface'
+settings:
+  id: 'language_block:language_interface'
+  label: 'Language switcher'
+  provider: language
+  label_display: '0'
+visibility: {  }

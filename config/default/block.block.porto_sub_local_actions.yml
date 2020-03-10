@@ -1,0 +1,20 @@
+uuid: baa5b878-7193-4f40-9dd5-1276072dad1b
+langcode: en
+status: true
+dependencies:
+  theme:
+    - porto_sub
+_core:
+  default_config_hash: 13GQpeITIJsp1kyPniXtWZfyFH87vb1xxJCHifL4UeE
+id: porto_sub_local_actions
+theme: porto_sub
+region: content
+weight: -20
+provider: null
+plugin: local_actions_block
+settings:
+  id: local_actions_block
+  label: 'Primary admin actions'
+  provider: core
+  label_display: '0'
+visibility: {  }

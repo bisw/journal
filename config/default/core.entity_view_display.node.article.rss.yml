@@ -52,3 +52,4 @@ hidden:
   field_tags: true
   field_volume: true
   field_year_of_publication: true
+  langcode: true

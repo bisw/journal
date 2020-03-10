@@ -1,0 +1,22 @@
+uuid: 37b98795-4077-44a5-a489-4fe31d8a76b0
+langcode: en
+status: false
+dependencies:
+  module:
+    - system
+  theme:
+    - porto_sub
+_core:
+  default_config_hash: jQQUUWN2Uxr5qZtc9zcJKBCxpKY8orN1u2HPqYYRQDI
+id: porto_sub_powered
+theme: porto_sub
+region: header
+weight: 10
+provider: null
+plugin: system_powered_by_block
+settings:
+  id: system_powered_by_block
+  label: 'Powered by Drupal'
+  provider: system
+  label_display: '0'
+visibility: {  }

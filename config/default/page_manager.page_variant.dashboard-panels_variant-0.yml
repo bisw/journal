@@ -1,0 +1,39 @@
+uuid: ff5eccda-5e12-445d-8fde-cfb9c06f31b9
+langcode: en
+status: true
+dependencies:
+  config:
+    - page_manager.page.dashboard
+  module:
+    - panels
+    - search
+id: dashboard-panels_variant-0
+label: Panels
+variant: panels_variant
+variant_settings:
+  blocks:
+    f01d13a3-9324-4280-b26f-67a548d58bcb:
+      id: search_form_block
+      label: 'Search form'
+      provider: search
+      label_display: visible
+      page_id: ''
+      region: top
+      weight: 0
+      uuid: f01d13a3-9324-4280-b26f-67a548d58bcb
+      context_mapping: {  }
+  id: panels_variant
+  uuid: a916ef18-c5bb-4b81-98af-75777395cf51
+  label: null
+  weight: 0
+  layout: layout_twocol_bricks
+  layout_settings: {  }
+  page_title: Dashboard
+  storage_type: page_manager
+  storage_id: dashboard-panels_variant-0
+  builder: ipe
+page: dashboard
+weight: 0
+selection_criteria: {  }
+selection_logic: and
+static_context: {  }

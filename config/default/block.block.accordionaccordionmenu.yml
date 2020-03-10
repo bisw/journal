@@ -1,0 +1,36 @@
+uuid: 757c4315-5f18-4726-a92d-68f88eca53e2
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.accordion-menu
+  module:
+    - accordion_menus
+    - system
+    - user
+  theme:
+    - porto_sub
+id: accordionaccordionmenu
+theme: porto_sub
+region: left_sidebar
+weight: 0
+provider: null
+plugin: 'accordion_menus_block:accordion-menu'
+settings:
+  id: 'accordion_menus_block:accordion-menu'
+  label: 'Accordion Accordion Menu'
+  provider: accordion_menus
+  label_display: '0'
+visibility:
+  request_path:
+    id: request_path
+    pages: "/dashboard\r\n/user\r\n/user/*\r\n/article-lists"
+    negate: false
+    context_mapping: {  }
+  user_role:
+    id: user_role
+    roles:
+      jn_admin: jn_admin
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'
