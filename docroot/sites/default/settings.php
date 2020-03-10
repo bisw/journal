@@ -756,10 +756,10 @@ $settings['entity_update_backup'] = TRUE;
 #   include $app_root . '/' . $site_path . '/settings.local.php';
 # }
 $databases['default']['default'] = array (
-  'database' => 'journal_latest',
+  'database' => 'journal_2020_03_10',
   'username' => 'root',
   'password' => 'admin',
-  'prefix' => '',
+  'prefix' => 'drup_',
   'host' => 'localhost',
   'port' => '3306',
   'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
